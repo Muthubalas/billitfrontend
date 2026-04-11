@@ -1,0 +1,229 @@
+<div class="trail" id="trail">
+  <!-- <app-sidetest [isOpen]="sideNavOpen" (toggle)="toggleSideNav()"></app-sidetest> -->
+  <!-- <app-sidenavbar [isOpen]="sideNavOpen" *ngIf="this.role==1" (toggle)="toggleSideNav()"></app-sidenavbar> -->
+  <div class="main-content" style="background-color: #F4F7FE;width: 150%;height: 100vh;" >
+    <app-sidetest></app-sidetest>
+<div class="top">
+  <h1 class="heading">Salon Inventory</h1>
+  <div class="rightop">
+    <div>
+      <button class="billbut" (click)="toggleDropdown()"><img src="assets/images/fi_1159922.png" alt="">&nbsp;Create Bill</button>
+      <div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+        <div (click)="servebill()" class="repnav"> <a>Service </a></div><br>
+        <div (click)="probill()" class="repnav"> <a>Product </a></div><br>
+
+      </div>
+    </div>
+<div class="showpro">
+    <!-- <i class="fa fa-bell"  aria-hidden="true"></i> -->
+    <div class="profile" (click)="toggleDropdown1()">
+     <div class="propic">
+       <img src="assets/images/Profile icon.png" alt="">
+
+     </div>
+     <h1 class="proname">{{this.profilerole}} </h1>
+     <i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;"></i>
+    </div>
+    <div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+      <div  class="repnav side" (click)="editprofile()"> Edit Profile</div><br>
+      <div class="repnav side" (click)="logout()"> Log out </div><br>
+    </div>
+    </div>
+       </div>
+
+  </div>
+<div class="inventdetails">
+<div class="inventcards">
+<div class="inventc1">
+<div class="content ms-4 mt-3">
+<div class="inventrow1">
+<div class="cardhead">Least Stock</div>
+<img src="assets/images/Vector (4).png" style="margin-top: 5px;" alt="">
+</div>
+<div class="inventrow2">
+  <h1 class="customercount">{{this.leastcount}}</h1>
+  <p class="report2" (click)="exportleast()">View Report</p>
+</div>
+</div>
+</div>
+<div class="inventc1 c2">
+<div class="content ms-4 mt-3">
+<div class="inventrow1">
+<div class="cardhead">On Stock</div>
+<img src="assets/images/material-symbols_stockpot-outline (1).png" style="margin-top:-5px;" alt="">
+</div>
+<div class="inventrow4">
+  <h1 class="customercount">{{this.stockincount}}</h1>
+<p class="report2" (click)="exportstockin()" >View Report</p>
+</div>
+</div>
+</div>
+<div class="inventc1 c3">
+<div class="content ms-4 mt-3">
+<div class="inventrow5 ">
+<div class="cardhead mt-2"> Off Stock</div>
+<img src="assets/images/healthicons_rdt-result-out-stock-outline (1).png" alt="">
+</div>
+<div class="inventrow6 ">
+  <h1 class="customercount">{{this.stockoutcount}}</h1>
+<p class="report2" (click)="exportstockout()" >View Report</p>
+</div>
+</div>
+</div>
+<div class="inventc1 c4">
+<div class="content ms-4 mt-3">
+<div class="inventrow7 ">
+<div class="cardhead">Total Product</div>
+<img src="assets/images/ant-design_stock-outlined (1).png"  alt="">
+</div>
+<div class="inventrow8">
+  <h1 class="customercount">{{this.totalprodcount}}</h1>
+<p class="report2" (click)="exportTotal()">View Report</p>
+</div>
+</div>
+</div>
+
+</div>
+<div class="customerlist mt-3">
+<div class="customerbut">
+<div class="buttons">
+  <div><button class="addcus" (click)="addinv()"><i class="fa fa-plus" aria-hidden="true"></i>  &nbsp; Add  Quantity</button></div>
+<div><button (click)="addexpense()" class="addcus"><i class="fa fa-plus" aria-hidden="true"></i>  &nbsp;Salon Expense</button></div>
+</div>
+
+  <div class="datefilter">
+    <div >
+    <label for="fromDate">From</label><br>
+    <input type="date" class="date" id="fromDate" [(ngModel)]="fromDate" (change)="filterData()" />
+  </div>
+  <div>  <label for="toDate">To</label><br>
+    <input type="date" class="date" id="toDate" [(ngModel)]="toDate" (change)="filterData()" />
+  </div>
+
+
+  </div>
+
+
+<!-- </div> -->
+</div>
+<div class="exports">
+  <div class="exportbutton" *ngIf="showexport">
+    <button class="export"(click)="exportfilterdata()">Export </button>
+  </div>
+  <div class="exportbutton" *ngIf="showexport1">
+    <button class="export" (click)="exportfulldata()">Export  </button>
+  </div>
+</div>
+</div>
+<div class="change" *ngIf="show">
+<div class="custotable mt-3">
+
+
+<table style="width: 100%;">
+<thead style="border-radius: 20px;width: 97%;
+height: 50.775px;border-radius: 20px;
+border: 1px solid #EEE;position: sticky;top:-1px;">
+              <tr style="width: 97%;background: #F0F9FF">
+    <th class="cushead">SN</th>
+    <th class="cushead">Product ID</th>
+    <th  class="cushead">Date</th>
+    <th class="cushead">Product name</th>
+    <th class="cushead">Category</th>
+    <th class="cushead"> Quantity</th>
+    <th class="cushead">Cost</th>
+    <th class="cushead" style="padding: 0 45px;">Action</th>
+
+  </tr>
+
+  </thead>
+
+
+<tbody>
+
+    <tr style="border-radius: 20px;
+    height: 50.775px;border: 1px solid #EEE;background-color: white;" *ngFor="let item of paginatedData;let i=index" >
+<td class="staffbody">{{i+1}}</td>
+      <td class="staffbody">{{item.Product_id}}</td>
+      <td class="staffbody">{{ formatDate(item.createdAt) }}</td>
+      <!-- <td class="staffbody">{{ item.createdAt }}</td> -->
+      <td class="staffbody">{{item.Product_name}}</td>
+      <td class="staffbody">{{item.Product_category}}</td>
+      <td class="staffbody">{{item.Product_quantity}} </td>
+      <td class="staffbody">{{item.Product_price}}</td>
+      <td class="staffbody"  style="padding: 0px 37px">  <button class="edit"   (click)="updatesalon(item)" ><img src="assets/images/Group 22440.png" alt=""> Edit</button></td>
+      <!-- <td class="staffbody"   style="padding: 0px 37px"><img src="assets/images/Group 22173.png"  alt=""></td> -->
+
+    </tr>
+</tbody>
+</table>
+</div>
+
+<!-- <div class="pagination">
+  <button class="previous"  (click)="prevPage()"><<</button>
+  <div class="page-numbers">
+    <button class="pages" *ngFor="let page of totalPages()" (click)="goToPage(page)">
+      {{ page }}
+    </button>
+  </div>
+
+  <button class="next"  (click)="nextPage()">>></button>
+</div> -->
+</div>
+<div class="change" *ngIf="show1">
+  <div class="custotable mt-3">
+
+
+  <table style="width: 100%;">
+  <thead style="border-radius: 20px;width: 97%;
+  height: 50.775px;border-radius: 20px;
+  border: 1px solid #EEE;position: sticky;top:-1px;">
+                <tr style="width: 97%;background: #F0F9FF">
+      <th class="cushead">SN</th>
+      <th class="cushead">Product ID</th>
+      <th  class="cushead">Date</th>
+      <th class="cushead">Product name</th>
+      <th class="cushead">Category</th>
+      <th class="cushead">Quantity</th>
+      <th class="cushead">Cost</th>
+      <th class="cushead" style="padding: 0 45px;">Action</th>
+
+
+
+    </tr>
+
+    </thead>
+
+
+  <tbody>
+
+      <tr style="border-radius: 20px;
+      height: 50.775px;border: 1px solid #EEE;background-color: white;" *ngFor="let item of getPaginatedData();let i=index" >
+  <td class="staffbody">{{i+1}}</td>
+        <td class="staffbody">{{item.Product_id}}</td>
+        <td class="staffbody">{{ formatDate(item.createdAt) }}</td>
+        <!-- <td class="staffbody">{{ item.createdAt }}</td> -->
+        <td class="staffbody">{{item.Product_name}}</td>
+        <td class="staffbody">{{item.Product_category}}</td>
+        <td class="staffbody">{{item.Product_quantity}} </td>
+        <td class="staffbody">{{item.Product_price}}</td>
+        <td class="staffbody"  style="padding: 0px 37px">  <button class="edit"  (click)="updatesalon(item)" ><img src="assets/images/Group 22440.png" alt=""> Edit</button></td>
+
+
+      </tr>
+  </tbody>
+  </table>
+  </div>
+
+<!-- <div class="pagination">
+  <button class="previous"  (click)="onPageChange(currentPage - 1)"><<</button>
+  <ng-container *ngFor="let page of getPages()">
+    <button class="pages" (click)="onPageChange(page)">{{ page }}</button>
+  </ng-container>
+  <button class="next"  (click)="onPageChange(currentPage + 1)">>></button>
+</div> -->
+
+
+  </div>
+
+</div>
+

@@ -1,0 +1,110 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Add styles to make the side navigation and main content look better */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.mat-dialog-container{
+  border-radius: 49px !important;
+}
+
+.siden {
+  height: 100%;
+  width: 247px;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+
+  background: linear-gradient(184deg, #1F4681 49.85%, #85288E 100%);
+  overflow-x: hidden;
+  transition: 0.5s;
+
+}
+
+.siden button {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.siden button:hover {
+  color: #f1f1f1;
+}
+/* @media screen and (max-width: 768px) {
+  .siden {
+    width: 100px;
+  }
+  .siden:hover{
+    width: 247px;
+  }
+} */
+
+.main-content {
+  transition: margin-left 0.5s;
+  padding: 16px;
+}
+.mat-typography h3{
+  font-family: Lato !important;
+}
+table thead{
+  font-size: 16px;
+  font-weight: 500;
+  font-family: lato;
+}
+table tbody{
+  font-size: 15px;
+}
+.mat-body, .mat-body-1, .mat-typography{
+  font-weight: 500 !important;
+}
+div:where(.swal2-container) div:where(.swal2-actions) {
+  display: flex;
+  z-index: 1;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  gap: 1rem !important;
+  margin: 1.25
+
+}
+.mat-table {
+  background: none !important;
+}
+
+element.style {
+  display: block;
+}
+
+.swal2-popup.swal2-toast .swal2-html-container {
+  margin: 0.5em 1em;
+  padding: 0;
+  overflow: initial;
+  font-size: 15px !important;
+  text-align: initial;
+}
+.swal2-popup.swal2-toast .swal2-title {
+  margin: 0.5em 1em;
+  padding: 0;
+  margin-top: -1px !important;
+  font-size: 1em;
+  text-align: initial;
+}
+@media only screen and (max-width: 768px){
+
+  .siden{
+    z-index: 10;
+  }
+}
+#internal-print-space table thead {
+  border-bottom: 7px solid !important;
+}

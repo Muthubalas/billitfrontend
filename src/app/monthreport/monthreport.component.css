@@ -1,0 +1,368 @@
+.trail{
+  display: flex;
+  width: 100%;
+}
+.top{
+  display: flex;
+  margin-top: 10px;
+  width: 93%;
+  height: 50px;
+  justify-content: space-between;
+  margin-left: 30px;
+}
+.exportTotal{
+  display: flex;
+  gap: 10px;
+}
+.repnav{
+  cursor: pointer;
+  text-decoration: none;
+  color: #434343;
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.heading{
+  color: #1F192F;
+  font-family: Lato;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.rightop{
+  display: flex;
+  gap: 40px;
+}
+.billbut{
+  /* padding: 2px 1px; */
+  /* padding: 5px; */
+  color: #FFF;
+
+font-family: Lato;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+  border-radius: 5px;
+background: #1070A6;
+border: none;
+margin-top: 4px;
+  width: 131px;
+height: 35px;
+}
+.dropdown-content1 {
+  display: none;
+  position: absolute;
+  background-color: #FFF;
+  width: 180px;
+height: 83px;
+border-radius: 4px;
+border: 1px solid #E2DEDE;
+padding: 10px 36px;
+  /* min-width: 160px; */
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content1.show {
+  display: block;
+  margin-top: -5px;
+  width: 153px;
+  /* margin-left: 148px; */
+}
+.profile{
+  display: flex;
+  cursor: pointer;
+  gap: 20px;
+  margin-top: 5px;
+  }
+
+  .proname{
+    color:#54657E;
+    font-size: 13px;
+    font-family: 'Lato';
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFF;
+    width: 180px;
+  height: 83px;
+  border-radius: 4px;
+  border: 1px solid #E2DEDE;
+  padding: 10px 60px;
+    /* min-width: 160px; */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content.show {
+    display: block;
+    margin-top: 5px;
+  }
+  .reportdetails{
+    margin-top: 20px;
+    }
+    .reportinputs{
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: 30px;
+      /* gap: 1rem; */
+      justify-content: space-between;
+      width: 95%;
+    }
+    .repinp1{
+      width: 259.223px;
+    height: 44.32px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid #E2E2E2;
+    padding: 0 10px;
+    background: #FFF;
+    }
+.reportinputs1{
+  display: flex;
+ width: 95%;
+ justify-content: space-between;
+ margin-left: 30px;
+ margin-top: 30px;
+}
+.total{
+  display: flex;
+gap: 20px;
+
+}
+.totalsales{
+  cursor:unset;
+  width: 151px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1px solid #1F4783;
+  background: #1F4783;
+  color: #FFF;
+  padding: 0 10px;
+font-family: Lato;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+.export{
+  outline: none;
+  text-align: center;
+  cursor:pointer;
+  width: 100px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1px solid #33C481;
+  background: #33C481;
+  color: #FFF;
+  padding: 0 10px;
+font-family: Lato;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+.custotable{
+  margin-left: 30px;
+
+}
+.cushead{
+  color: #000;
+  padding: 5px 15px;
+font-family: Lato;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+.cusbody{
+  padding: 5px 15px;
+    color: #000;
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+}
+
+.custotable{
+  max-height: 350px;
+  overflow-y: scroll;
+}
+.picker{
+  display: flex;
+      width: 100%;
+    justify-content: space-between;
+  /* gap: 1rem; */
+}
+label{
+  color: #3B4B64;
+font-family: Lato;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+#monthchart{
+  margin-left: 10px;
+  margin-top: 0px;
+  width: 96% !important;
+  height: 480px !important;
+}
+.chartBox {
+  width: 100%;
+  height: 500px;
+  margin-top: 10px;
+  border-radius: 25px;
+  border: solid 3px #F4F7FE;
+  background: white;
+}
+
+
+@media screen and (max-width: 885px) {
+  .billbut{
+    color: #FFF;
+    font-family: Lato;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    border-radius: 5px;
+    background: #1070A6;
+    border: none;
+    margin-top: 4px;
+    width: 107px;
+    height: 35px;
+}
+.top{
+  display: flex;
+  margin-top: 40px;
+  width: 97%;
+  height: 50px;
+  justify-content: space-between;
+  margin-left: 6px;
+}
+.heading{
+  color: #1F192F;
+  font-family: Lato;
+  font-size: 27px;
+}
+.rightop{
+  display: flex;
+  gap: 10px;
+}
+}
+
+
+.main-content{
+  margin-left: 247px;
+}
+@media only screen and (max-width: 768px){
+  .reportinputs{
+    width: 100%;
+    margin-left: 0px;
+  }
+  .dropdown-content1{
+    padding: 14px 19px;
+}
+  .dropdown-content1.show{
+    width: 100px;
+    margin-left: 0px;
+}
+.repnav{
+  font-size: 12px;
+}
+.dropdown-content{
+  width: 126px;
+}
+.dropdown-content.show{
+  padding: 9px 32px;
+  margin-top: 5px;
+}
+  .heading{
+    color: #1F192F;
+    font-family: Lato;
+    font-size:  5vw;
+    margin-top: 10px;
+  }
+  .main-content{
+    margin-left: 0px;
+  }
+  .page{
+    z-index: 8;
+  }
+  .fix{
+    z-index: 9;
+  }
+  .siden{
+    z-index: 10;
+  }
+  .profile{
+    display: flex;
+    cursor: pointer;
+    gap: 12px;
+  }
+  .rightop{
+    gap: 8px;
+}
+.totalamount{
+  margin-top: 11px;
+}
+.top{
+  display: flex;
+  /* margin-top: 40px; */
+  width: 102%;
+  height: 50px;
+  justify-content: space-between;
+  margin-left: -2px;
+}
+.exportTotal{
+  margin-top: -8px;
+}
+.chartBox{
+
+  margin-top: 25px;
+}
+#monthchart{
+ margin-top:0px;
+}
+.chartBox{
+  height: 486px;
+}
+.box{
+  width: 1055px;
+}
+.colarge{
+  height: 689px;
+  max-width:700px;
+  overflow-x: scroll;
+}
+}
+@media only screen and (max-width: 591px){
+.picker{
+  gap: 10px;
+  flex-direction: column;
+}
+.repinp1{
+  width: 100%;
+}
+}
+.disabled-btn {
+  position: relative;
+  opacity: 0.6;
+  cursor: not-allowed;
+}

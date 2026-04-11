@@ -1,0 +1,35 @@
+<div class="form">
+  <form action="" [formGroup]="salon">
+  <div class="row1">
+    <input type="text" name="" formControlName="_id" id="" style="display: none;">
+    <input type="text" name="" formControlName="description" id="" style="display: none;">
+    <input type="text" name="" formControlName="price" id="" style="display: none;">
+    <div><label for="" class="mb-2">Choose product</label> <span  style="color:red;">*</span><br>
+
+    <select formControlName="name" class="adminpt"(change)="onProductSelected($event)" >
+      <option *ngFor="let product of getpro" [ngValue]="product.Product_name">{{ product.Product_name }}</option>
+    </select>
+
+    </div>
+    <div><label for="" class="mb-2">Choose category</label><span  style="color:red;">*</span> <br>
+      <select #productInput  class="adminpt" formControlName="category" (change)="catselect($event,productInput.options[productInput.selectedIndex].id,productInput.options[productInput.selectedIndex].getAttribute('data-product-id'),productInput.options[productInput.selectedIndex].getAttribute('data-productdes-id'),productInput.options[productInput.selectedIndex].getAttribute('data-productprice-id'))">
+        <option value="show" selected  style="color: gray;">Select a Category</option>
+        <ng-container *ngFor="let cato of this.getcat">
+
+          <option [id]="cato.Product_id" [attr.data-product-id]="cato._id" [attr.data-productdes-id]="cato.Product_description" [attr.data-productprice-id]="cato.Product_price" [ngValue]="cato.Product_category">{{cato.Product_category}}</option>
+        </ng-container>
+    </select></div>
+
+  </div>
+  <div class="row2 ">
+  <div><label for="" class="mb-2">Product ID</label><span  style="color:red;">*</span> <br> <input type="text" class="adminpt"  formControlName="id" ></div>
+   <div><label for="" class="mb-2">Quantity</label><span  style="color:red;">*</span> <br><input type="number" min="0" (input)="quantity($event)" name="" id="" class="adminpt" formControlName="quantity"></div>
+  </div>
+  <div class="formbut mt-5">
+    <div> <button class="custosave" (click)="addinvent()">Update</button></div>
+    <div>  <button class="custocancel"  (click)="cancelUpdate()">Cancel</button>
+    </div>
+    </div>
+    </form>
+</div>
+

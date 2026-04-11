@@ -1,0 +1,103 @@
+<div class="trail" id="trail">
+  <!-- <app-sidetest [isOpen]="sideNavOpen" (toggle)="toggleSideNav()"></app-sidetest> -->
+<!-- <app-sidenavbar [isOpen]="sideNavOpen" *ngIf="this.userRole==1" (toggle)="toggleSideNav()"></app-sidenavbar> -->
+  <div class="main-content" >
+    <app-sidetest></app-sidetest>
+<div class="page">
+  <div class="top1">
+
+    <div>
+    <button class="billbut" (click)="toggleDropdown()"><img src="assets/images/fi_1159922.png" alt="">&nbsp;Create Bill</button>
+    <div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+      <div (click)="servebill()" class="repnav"> <a>Service </a></div><br>
+      <div (click)="probill()" class="repnav"> <a>Product </a></div><br>
+
+    </div>
+  </div>
+  <div class="rightop">
+
+
+<!-- <i class="fa fa-bell"  aria-hidden="true"></i> -->
+<div class="profile" (click)="toggleDropdown1()">
+<div class="propic">
+  <img src="assets/images/Profile icon.png" alt="">
+
+</div>
+<h1 class="proname">{{this.profilerole}}</h1>
+<i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;"></i>
+</div>
+<div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+  <div  class="repnav side" (click)="editprofile()"> Edit Profile</div><br>
+  <div class="repnav side" (click)="logout()"> Log out </div><br>
+</div>
+  </div>
+
+
+  </div>
+</div>
+<div class="ss">
+  <h1 class="heading">All Service</h1>
+  <div class="rightbot">
+    <div class="rights">
+      <div class="search1">
+        <input type="text" name="" class="topsearch" [(ngModel)]="searchTerm" (ngModelChange)="onFilterChange()" id="">
+        <img src="assets/images/search icon.png" style="position: relative; right: 40px; top: -2px;" alt="">
+      </div>
+
+
+  <button class="add" style="background-color:#0D99FF;border: none;color: white;" (click)="saveserve()" ><div style="margin-top: 2px;">
+    <!-- <img src="assets/images/zondicons_add-outline.png" alt=""> -->
+    <i class="fa fa-plus" aria-hidden="true" style="margin-top: 4px;"></i>
+  </div><div style="margin-top: 3px;">Add Service</div></button>
+  </div>
+  </div>
+
+</div>
+<div class="custotable  mb-3 mt-3">
+
+  <table class="tabler">
+
+    <thead class="" style="background-color: #DEEDFA;; height: 50px;position: sticky;top: 0;" >
+    <tr>
+      <th >SN</th>
+      <th>Service ID</th>
+      <th>Service name</th>
+      <th>Cost</th>
+      <th>Gender</th>
+      <th style="text-align: center;">Action</th>
+
+    </tr>
+  </thead>
+
+  <tbody class="t1"  style="background-color: white;font-weight: normal;">
+    <tr *ngFor="let servelist of filteredPeople;let i=index">
+
+<td class="t3">{{ calculateIndex(i) }}</td>
+
+      <td class="t3">{{servelist.service_id}}</td>
+      <td class="t3">{{servelist.service_name}}</td>
+      <td class="t3">{{servelist.service_price}}</td>
+      <td class="t3">{{servelist.service_gender}}</td>
+
+      <td class="t3"><div class="actions"><div><button class="edit"  (click)="updateserve(servelist)"><img src="assets/images/Group 22440.png" alt=""> Edit</button></div>
+       <div><button class="delete" (click)=" deleteservice(servelist)"><img src="assets/images/mdi_delete.png" alt=""> Delete</button></div></div></td>
+
+    </tr>
+
+
+</tbody>
+   </table>
+
+   </div>
+   <!-- <div class="pagination">
+    <button (click)="onPrevious1()"  style="padding: 10px 10px; border:none;border-radius: 10px;"><<</button>
+    <button *ngIf="showPrevious()" (click)="onPrevious()" style="padding: 10px 10px; border:none;border-radius: 10px;"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+    <button style="background-color: transparent;border: none;" *ngFor="let page of totalPagesArray()"  [class.active]="page === currentPage" (click)="onPageChange(page)">
+      {{ page }}
+    </button>
+    <button *ngIf="showNext()" (click)="onNext()" style="padding: 10px 10px; border:none;border-radius: 10px;"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+    <button (click)="onLastPage()" style="padding: 10px 10px; border:none; border-radius: 10px;">>></button>
+
+  </div> -->
+  </div>
+  </div>

@@ -1,0 +1,119 @@
+
+<div class="trail" id="trail">
+  <!-- <app-sidetest [isOpen]="sideNavOpen" *ngIf="this.userRole==0" (toggle)="toggleSideNav()"></app-sidetest>
+  <app-sidenavbar [isOpen]="sideNavOpen" *ngIf="this.userRole==1" (toggle)="toggleSideNav()"></app-sidenavbar> -->
+    <div class="main-content" style="background-color: #F4F7FE;height: 100vh;" >
+      <app-sidetest [isOpen]="sideNavOpen" *ngIf="this.userRole==0"></app-sidetest>
+      <app-sidenavbar [isOpen]="sideNavOpen" *ngIf="this.userRole==1"></app-sidenavbar>
+       <div class="topmenu">
+        <div class="topbar">
+        <h1 class="heading">All Expense</h1>
+        <div class="rightcomp">
+
+              <div class="profile" (click)="toggleDropdown1()">
+                <div class="propic">
+                  <img src="assets/images/Profile icon.png" alt="">
+
+                </div>
+                <h1 class="proname">{{ this.profilerole}}</h1>
+                <i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;"></i>
+               </div>
+               <div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+                <div  class="repnav side" (click)="editprofile()"> Edit Profile</div><br>
+                <div class="repnav side" (click)="logout()"> Log out </div><br>
+              </div>
+
+        </div>
+       </div></div>
+
+
+
+      <div class="menulink">
+
+        <a class="icon-link" id="adexp" (click)="addexp()">
+
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Add Expense
+          </a>
+
+          <div class="date-filter">
+            <div>
+            <label for="">From </label><br>
+            <input type="date" class="date" placeholder="From Date" [(ngModel)]="fromDate"></div>
+         <div>   <label for="">To </label><br>
+            <input type="date" class="date" placeholder="To Date"  [(ngModel)]="toDate"></div>
+            <div><button  class="filter" (click)="applyDateFilter()">Filter</button></div>
+          </div>
+
+          <div class="example-container mat-elevation-z8" id="example-container" style="box-shadow: none !important;">
+<div class="matexp">
+            <mat-table #table [dataSource]="dataSource">
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef> SN </mat-header-cell >
+                  <mat-cell *matCellDef="let element; let i = index">
+                    {{ i + 1 }} <!-- Display the index as serial number -->
+                  </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.date | date: 'dd/MM/yyyy'}} </mat-cell>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Expense  </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <mat-header-cell *matHeaderCellDef> Cost </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="actions" >
+                <mat-header-cell *matHeaderCellDef style="justify-content: center;"> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="justify-content: center;">
+                  <div class="button-container">
+                    <div class="actions"><div><button class="edit" [disabled]="userRole  !== '0'" [ngClass]="{'disabled-btn': userRole  !== '0'}"  (click)=" editexp(element)" ><img src="assets/images/Group 22440.png" alt=""> Edit</button></div>
+                      <div><button class="delete"  [disabled]="userRole  !== '0'" [ngClass]="{'disabled-btn': userRole  !== '0'}" (click)="deleteExp(element)"><img src="assets/images/mdi_delete.png" alt=""> Delete</button></div></div>
+                   <!-- <div> <button class="action-button butons"><img src="assets/images/dashboard/Group 51.png" (click)=" editexp(element)" alt=""></button></div>
+                   <div> <button class="action-button butons"><img src="assets/images/dashboard/trash-2.png" alt="" (click)="deleteExp(element)" ></button></div> -->
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns" style="    background-color: #F0F9FF;
+             border-radius: 8px;
+border: 1px solid #EEE;color:#3B4B64;font-size: 15px;"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns; " style="
+             border-radius: 8px;
+border: 1px solid #E2E2E2;
+
+background: #FFF;
+"></mat-row>
+            </mat-table>
+</div>
+            <mat-paginator #paginator
+            [pageSize]="5"
+           >
+</mat-paginator>
+
+          </div>
+
+       </div>
+
+
+    </div>
+
+  </div>
+
+

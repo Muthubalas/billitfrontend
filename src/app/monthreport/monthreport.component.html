@@ -1,0 +1,76 @@
+
+<div class="trail" id="trail">
+  <!-- <app-sidetest></app-sidetest> -->
+  <div class="main-content" style="background-color: #FDFBFE;    width: 100%; height: 100vh;">
+    <app-sidetest  *ngIf="this.role==0"  [ngClass]="{'isOpen1': isOpen1}"></app-sidetest>
+    <app-sidenavbar  *ngIf="this.role==1"  [ngClass]="{'isOpen1': isOpen1}"></app-sidenavbar>
+    <div class="top">
+      <h1 class="heading">Month Report</h1>
+      <div class="rightop">
+
+        <div>
+          <button class="billbut" (click)="toggleDropdown()"><img src="assets/images/fi_1159922.png" alt="">&nbsp;Create Bill</button>
+          <div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+            <div (click)="servebill()" class="repnav"> Service </div><br>
+            <div (click)="probill()" class="repnav"> Product </div><br>
+
+          </div>
+        </div>
+
+<div>
+        <!-- <i class="fa fa-bell"  aria-hidden="true"></i> -->
+        <div class="profile" (click)="toggleDropdown1()">
+         <div class="propic">
+           <img src="assets/images/Profile icon.png" alt="">
+
+         </div>
+         <h1 class="proname">{{this.profilerole}}</h1>
+         <i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;"></i>
+        </div>
+        <div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+          <div  class="repnav side" (click)="editprofile()"> Edit Profile</div><br>
+          <div class="repnav side" (click)="logout()"> Log out </div><br>
+        </div>
+        </div>
+           </div>
+
+      </div>
+      <div class="reportdetails">
+
+        <div class="reportinputs">
+          <div class="picker">
+
+<div>
+  <label class="label1 mb-2">Year </label><br>
+  <select name="" id="" class="repinp1" [(ngModel)]="selectedYear" (change)="yearchange($event)">
+    <option *ngFor="let year of yearList" [value]="year">{{ year }}</option>
+  </select>
+</div>
+
+
+<div class="exportTotal">
+  <div class="totalamount"><label for="">Total Sales</label><br>
+
+    <input type="text" name="" id="" class="totalsales mt-2" value="₹ {{this.total}}" readonly></div>
+  <div class="totalamount"><label for="" style="visibility: hidden;">Total Sales</label><br>
+
+    <input type="text" name="" id="" class="export mt-2" [disabled]="role !== '0'" [ngClass]="{'disabled-btn': role !== '0'}" (click)="exportToExcel()" value="Export" readonly></div>
+     <!-- <button  class="export mt-2"   [disabled]="role !== '0'" [ngClass]="{'disabled-btn': role !== '0'}" (click)="exportToExcel()"  >Export</button> -->
+     
+</div>
+
+
+
+        </div>
+
+        <div class="chartBox">
+          <div class="colarge">
+            <div class="box">
+          <canvas id="monthchart"></canvas>
+          </div>
+          </div>
+        </div>
+
+  </div>
+  </div>
+  </div>

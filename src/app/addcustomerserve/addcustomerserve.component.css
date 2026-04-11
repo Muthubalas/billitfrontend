@@ -1,0 +1,141 @@
+.input1{
+  width: 162.383px;
+height: 44.32px;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+
+background: #FAFAFA;
+}
+.formr1{
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin-top: 40px;
+  margin-left:20px;
+  /* justify-content: space-between; */
+  gap: 65px;
+}
+img{
+  position: relative;
+  left: 30px;
+}
+.formr2,.formr3,.formr4{
+  display: flex;
+
+  /* flex-wrap: wrap; */
+  justify-content: space-around;
+}
+.formr3,.formr4{
+  margin-top: 20px;
+}
+.formr2{
+  margin-top: 40px;
+}
+label{
+  color: #3B4B64;
+
+font-family: Lato;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+.custosave{
+  width: 162.383px;
+height: 44.32px;
+flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+color: #FFF;
+
+font-family: Lato;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+background: #0D99FF;
+}
+.custocancel{
+  width: 162.383px;
+height: 44.32px;
+flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+color: #3B4B64;
+
+font-family: Lato;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+background: #EFECEC;
+}
+/* input[type="text"] {
+  margin-left: 20px;
+} */
+.input2{
+  margin-top:5px;
+  padding: 0 10px;
+  width: 297px;
+height: 44px;
+flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+background: #FFF;
+}
+#cusid{
+  padding: 0 50px;
+}
+.formbut{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 50px;
+}
+
+@media screen and (max-width:400px){
+  .input2{
+    width: 238px;
+}
+}
+@media screen and (max-width:925px){
+  img{
+    position: relative;
+    left: 18px;
+    top: 30px;
+}
+}
+@media screen and (max-width:768px){
+  .formr1{
+    gap: 20px;
+    margin-left: 0px;
+    margin-top: 0;
+  }
+  .formr2{
+    margin-top: 18px;
+}
+
+ .formr1,.formr2,.formr3,.formr4{
+    gap: 10px !important;
+   flex-direction: column;
+  }
+  .formbut{
+    gap: 12px;
+    margin-top:27px;
+  }
+  .input2,.input1{
+    width: 100%;
+  }
+  img{
+    position: relative;
+    left: 18px;
+    top: 30px;
+}
+
+}
+@media screen and (max-width:500px){
+  .custosave,.custocancel{
+    width: 100px;
+  }
+}

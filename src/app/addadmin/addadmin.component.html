@@ -1,0 +1,43 @@
+<div class="form">
+  <form action="" [formGroup]="admin">
+  <div class="row1">
+    <div id="name"><label for="" class="mb-2">User Name</label><span  style="color:red;">*</span> <br> <input type="text" formControlName="name" (input)="clearUsernameError()" style="text-transform: capitalize;" class="adminpt"><br>
+      <span style="color: red;" *ngIf="usernameExists">Username already exists</span>
+      <span  style="color:red;" *ngIf="name && name.invalid && name.touched">*Admin name  is required</span><br></div>
+    <div><label for="" class="mb-2">Email ID</label><span  style="color:red;">*</span> <br><input type="email" formControlName="email"  name="" id="" class="adminpt"><br>
+      <span  style="color:red;" *ngIf="email && email.invalid && email.touched">*Email  is required</span><br></div>
+  </div>
+  <div class="row2">
+  <div ><label for="" class="mb-2">Password</label><span  style="color:red;">*</span> <br> <input [type]="changetype?'password':'text'" class="adminpt"  formControlName="password"><span class="eye" (click)="view()" ><i [ngClass]="visible?'fa fa-eye-slash':'fa fa-eye'" style="cursor: pointer;"></i></span>
+    <br>
+    <span  style="color:red;" *ngIf="password && password.invalid && password.touched">*Password  is required</span><br></div>
+   <div><label for="" class="mb-2">Phone No</label><span  style="color:red;">*</span> <br><input type="tel" name="" id="" class="adminpt" formControlName="phone" pattern="[0-9]{10}" maxlength="10">
+    <br>
+    <span  style="color:red;" *ngIf="phone && phone.invalid && phone.touched">*Phone no  is required</span><br></div>
+  </div>
+  <div class="row3">
+    <div><label for="" class="mb-2">Role</label><span  style="color:red;">*</span> <br>
+      <select name="" id=""formControlName="role"  name="" id="" class="select">
+        <option value="0">Admin</option>
+        <option value="1">Manager</option>
+      </select><br>
+      <span  style="color:red;" *ngIf="role && role.invalid && role.touched">*Role  is required</span><br>
+     </div>
+     <br>
+     <!-- <div class="formbut ">
+       <button class="custosave" (click)="saveadmin()">Save</button>
+      &nbsp;
+     <button class="custocancel" (click)="cancelUpdate()">Cancel</button>
+
+
+      </div> -->
+  <div class="formbut ">
+    <div> <button class="custosave" (click)="saveadmin()">Save</button>
+    </div>
+    <div>  <button class="custocancel" (click)="cancelUpdate()">Cancel</button>
+    </div>
+
+    </div>
+    </div>
+    </form>
+</div>

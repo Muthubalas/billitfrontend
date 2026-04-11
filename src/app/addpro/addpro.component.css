@@ -1,0 +1,173 @@
+button{
+  margin-right: 5px;
+}
+
+#productid{
+  padding-left: 40px;
+/* padding: 0 40px; */
+}
+
+.productid{
+  width:20.48px;height:15.02px;position: relative;top:15px;left: 32px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  z-index: 3;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #f2f2f2;
+}
+.cat{
+border: 5px solid lightgray;
+}
+.id{
+  width: 162px;
+  height:44px;
+  border: none;
+  background-color:#FAFAFA;
+  border: 1px solid #E2E2E2;
+}
+.inp1{
+  padding: 10px;
+  width: 259px;
+  height:44px;
+  margin-top: 6px;
+  border: none;
+  background-color:#FFFFFF;
+  border: 1px solid #E2E2E2;
+}
+.proid{
+  display: flex;
+  margin-top: 30px;
+}
+input,select{
+  border-radius: 10px;
+}
+.idimg{
+  display: flex;
+  margin-left: 17px;
+
+}
+
+.idet{
+  margin-top: 30px;
+  display: flex;
+  margin-left: 40px;
+  gap:100px;
+
+}
+.idet1{
+  margin-top: 10px;
+  display: flex;
+  margin-left: 40px;
+  gap:100px;
+
+}
+.idet2{
+  margin-top: 20px;
+  display: flex;
+  margin-left: 40px;
+  gap:85px;
+
+}
+.save{
+  padding: 14px 60px;
+
+  border: none;
+  border-radius: 10px;
+  background-color:#0D99FF;
+
+color: #FFF;
+
+font-family: Lato;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.cancel{
+  background-color: #EFECEC;
+  padding: 14px 55px;
+  border: none;
+  border-radius: 10px;
+
+color: #3B4B64;
+
+font-family: Lato;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.buttons{
+  justify-content:center;
+  gap: 1rem !important;
+  display: flex;
+flex-wrap: wrap;
+  align-items: center;
+  margin-top: 26px;
+}
+label{
+  color: #3B4B64;
+
+font-family: Lato;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+.mat-dialog-content {
+  max-height: 80vh !important;
+}
+
+
+@media screen and (max-width:768px){
+  .idet,.idet1,.idet2{
+    display: block;
+    margin-left: 0px;
+
+  }
+  .idet1,.idet2{
+    display: block;
+    margin-left: 0px;
+    margin-top: 10px;
+  }
+  .inp1{
+    width: 100%;
+  }
+  .productid{
+    width: 20.48px;
+    height: 15.02px;
+    position: relative;
+    top: 15px;
+    left: 10px;
+  }
+  .id{
+    margin-left: -25px;
+  }
+  .idimg{
+    margin-left: 0px;
+  }
+  .idet{
+    margin-top: 30px;
+  }
+}
+@media screen and (max-width:477px){
+  .save,.cancel{
+    padding: 12px 35px;
+  }
+}

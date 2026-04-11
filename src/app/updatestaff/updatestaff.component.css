@@ -1,0 +1,191 @@
+.circular-image-container {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #F8F8F8;
+  background-image: url('src/assets/images/streamline_user-profile-focus.png');
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#imgupload{
+  display: none;
+}
+.circular-image {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  /* object-fit: contain; Adjust based on your requirements */
+  border-radius: 50%;
+}
+.addcustomage{
+  display: flex;
+margin-left: 34px;
+}
+.popr1{
+  display: flex;
+  gap: 78px;
+}
+.popr2{
+  display: flex;
+  gap: 57px;
+}
+.addphoto{
+  width: 92px;
+height: 29px;
+flex-shrink: 0;
+border-radius: 3px;
+border: 1px solid #E2E2E2;
+color: #FFF;
+text-align: center;
+font-family: Lato;
+font-size: 12px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+background: #08224A;
+}
+.upimg{
+  width:12px;
+  height:9px;position: relative;
+  top: 2px;
+  left: 8px;
+}
+.addimg{
+  display: flex;
+  margin-top: 35px;
+}
+.imgicon{
+  width:29px;
+  height:29px;
+  background-color:#FFFFFF;
+  border-radius: 15px;
+  position: relative;
+  left: 20px;
+}
+.label1{
+  color: #3B4B64;
+
+font-family: Lato;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+.staffname{
+  position: relative;
+  left: 20px;
+}
+.save{
+
+  width: 162.383px;
+  height: 44.32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #E2E2E2;
+  color: #FFF;
+
+  font-family: Lato;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  background: #0D99FF;
+}
+.cancel{
+  width: 162.383px;
+  height: 44.32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #E2E2E2;
+  color: #3B4B64;
+
+  font-family: Lato;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  background: #EFECEC;
+}
+.small{
+  display: flex;
+  gap: 30px;
+}
+.inp1{
+  flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+width: 129px;
+height: 45px;
+padding: 0 10px;
+background: #FFF;
+}
+.inp{
+  width: 296.988px;
+  height: 44.32px;
+padding: 0 10px;
+flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+
+background: #FFF;
+}
+.staffpopup{
+  margin-top:20px;
+  margin-left:50px;
+}
+.buttons{
+   justify-content: center;
+margin-right: 40px;
+flex-wrap: wrap;
+  display: flex;
+  margin-top: 35px;
+  gap: 22px ;
+}
+.eye{
+  position: relative;
+  right: 35px;
+}
+@media only screen and (max-width: 768px){
+ .popr1, .popr2,.small{
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .inp,.inp1{width: 100%;}
+  .staffpopup{
+    /* margin-top: 20px; */
+    margin-left: 0px;
+}
+.circular-image-container{
+  background-repeat: no-repeat;
+}
+/* .buttons{
+  display: block;
+} */
+.popr1{
+  margin-left: 0px;
+}
+.staffname{
+  position: relative;
+  left: 0px;
+}
+.buttons{
+  gap: 10px;
+  margin-right: 0px;
+}
+.save,.cancel{
+  width: 118.383px;
+}
+.addcustomage{
+  margin-left: 0px;
+  justify-content: center;
+}
+}
+@media only screen and (max-width: 369px){
+.save,.cancel{
+  width: 100px;
+}
+}

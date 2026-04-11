@@ -1,0 +1,111 @@
+
+<div class="trail" id="trail">
+
+    <div class="main-content" >
+      <app-sidetest></app-sidetest>
+  <div class="page">
+    <div class="top1">
+  
+      <div>
+      <button class="billbut" (click)="toggleDropdown()"><img src="assets/images/fi_1159922.png" alt="">&nbsp;Create Bill</button>
+      <div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+        <div (click)="servebill()" class="repnav"> <a>Service </a></div><br>
+        <div (click)="probill()" class="repnav"> <a>Product </a></div><br>
+  
+      </div>
+    </div>
+    <div class="rightop">
+  
+  
+  <!-- <i class="fa fa-bell"  aria-hidden="true"></i> -->
+  <div class="profile" (click)="toggleDropdown1()">
+  <div class="propic">
+    <img src="assets/images/Profile icon.png" alt="">
+  
+  </div>
+  <h1 class="proname">{{this.profilerole}}</h1>
+  <i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;"></i>
+  </div>
+  <div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+    <div  class="repnav side" (click)="editprofile()"> Edit Profile</div><br>
+    <div class="repnav side" (click)="logout()"> Log out </div><br>
+  </div>
+    </div>
+  
+  
+    </div>
+  </div>
+  <div class="ss">
+    <h1 class="heading">Appointments</h1>
+    <div class="rightbot">
+      <div class="rights">
+        <div class="search1">
+          <input type="text" name="" class="topsearch" [(ngModel)]="searchTerm" (ngModelChange)="onFilterChange()" id="">
+          <img src="assets/images/search icon.png" style="position: relative; right: 40px; top: -2px;" alt="">
+        </div>
+  
+  
+    <button class="add" style="background-color:#0D99FF;border: none;color: white;" (click)="saveappointment()" ><div style="margin-top: 2px;">
+    
+      <i class="fa fa-plus" aria-hidden="true" style="margin-top: 4px;"></i>
+    </div><div style="margin-top: 3px;">Add Appointment</div></button>
+    </div>
+    </div>
+  
+  </div>
+  <div class="custotable  mt-3 ">
+  
+    <table class="tabler">
+  
+      <thead class="" style="background-color: #DEEDFA;; height: 50px;position: sticky;top: 0;" >
+      <tr>
+        <th >SN</th>
+        <th>Customer Name</th>
+        <th>Gender</th>
+        <th>Service</th>
+        <th>Phone</th>
+        <th>Date and Time</th>
+        <th>Location</th>
+        <th>Staff name</th>
+        <th>Status</th>
+        
+        <th style="text-align: center;">Action</th>
+  
+      </tr>
+    </thead>
+  
+    <tbody class="t1" style="background-color: white;font-weight: normal;">
+      <!-- {{ filteredPeople | json }} -->
+      <tr *ngFor="let appointment of filteredPeople; let i = index">
+        <td class="t3">{{ calculateIndex(i) }}</td>
+        <td class="t3">{{ appointment.customer_name }}</td>
+        <td class="t3">{{ appointment.gender }}</td>
+        <td class="t3">{{ appointment.service }}</td>
+        <td class="t3">{{ appointment.phone }}</td>
+        <td class="t3">{{ appointment.date_time }}</td>
+        <td class="t3">{{ appointment.location }}</td>
+        <td class="t3">{{ appointment.staffname }}</td>
+        <td class="t3">{{ appointment.status }}</td>
+        <td class="t3">
+          <div class="actions">
+            <div>
+              <button class="edit" (click)="updateappointment(appointment)">
+                <img src="assets/images/Group 22440.png" alt=""> Edit
+              </button>
+            </div>
+            <div>
+              <button class="delete" (click)="deleteappointment(appointment)">
+                <img src="assets/images/mdi_delete.png" alt=""> Delete
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+     </table>
+  
+     </div>
+    
+    </div>
+    </div>
+  

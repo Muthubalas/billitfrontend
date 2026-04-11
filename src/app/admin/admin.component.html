@@ -1,0 +1,95 @@
+<div class="trail" id="trail">
+  <!-- <app-sidetest [isOpen]="sideNavOpen" (toggle)="toggleSideNav()"></app-sidetest> -->
+
+  <div class="main-content">
+
+    <app-sidetest></app-sidetest>
+
+<div class="top">
+  <h1 class="heading">Admin</h1>
+  <div class="rightop">
+
+    <div>
+      <button class="billbut" (click)="toggleDropdown()"><img src="assets/images/fi_1159922.png" alt="">&nbsp;Create Bill</button>
+      <div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+        <div (click)="servebill()" class="repnav"> <a>Service </a></div><br>
+        <div (click)="probill()" class="repnav"> <a>Product </a></div><br>
+
+
+      </div>
+    </div>
+    <!-- <i class="fa fa-bell"  aria-hidden="true"></i> -->
+    <div>
+    <div class="profile" (click)="toggleDropdown1()">
+
+     <div class="propic">
+       <img src="assets/images/Profile icon.png" alt="">
+
+     </div>
+     <h1 class="proname">{{this.profilerole}}</h1>
+     <i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;"></i>
+    </div>
+    <div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+      <div  class="repnav side" (click)="editprofile()"> Edit Profile</div><br>
+      <div class="repnav side" (click)="logout()"> Log out </div><br>
+    </div>
+    </div>
+       </div>
+
+  </div>
+  <div class="admindetail">
+  <div> <button class="addadmin" (click)="addadmin()"><i class="fa fa-plus" aria-hidden="true"></i>  &nbsp;  Add Admin</button></div>
+
+  <div class="custotable mt-3">
+
+
+    <table style="width: 97%;">
+<thead style="border-radius: 20px;width: 97%;
+height: 50.775px;border-radius: 20px;
+border: 1px solid #EEE;
+
+background: #F0F9FF">
+                  <tr style="width: 97%;">
+        <th class="cushead">SN</th>
+        <th class="cushead">Name</th>
+        <th class="cushead">Role</th>
+        <th class="cushead">Email ID</th>
+        <th class="cushead">Contact no</th>
+        <th class="cushead" style="padding: 0 50px" >Action</th>
+
+
+
+      </tr>
+
+      </thead>
+
+
+<tbody>
+
+  <tr *ngFor="let admin of getadmin; let i=index" style="border-radius: 20px; height: 50.775px; border: 1px solid #EEE; background-color: white;">
+    <td class="staffbody">{{i+1}}</td>
+    <td class="staffbody">{{admin.name}}</td>
+    <td class="staffbody">{{admin.role}}</td>
+    <td class="staffbody">{{admin.email}}</td>
+    <td class="staffbody">{{admin.phone}}</td>
+    <td class="t4">
+      <div class="actions">
+        <div>
+          <button class="edit" (click)="updateadmin(admin)">
+            <img src="assets/images/Group 22440.png" alt=""> Edit
+          </button>
+        </div>
+        <div *ngIf="i > 0">
+          <button class="delete" (click)="deleteadmin(admin)">
+            <img src="assets/images/mdi_delete.png" alt=""> Delete
+          </button>
+        </div>
+      </div>
+    </td>
+  </tr>
+</tbody>
+    </table>
+
+</div>
+</div>
+

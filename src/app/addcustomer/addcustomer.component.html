@@ -1,0 +1,33 @@
+<div class="form">
+
+  <div class="formr1">
+    <div><img src="assets/images/noto_crown.png" alt=""> <input type="text" name="" [(ngModel)]="cusmemno" class="input1" style="padding: 0 41px;"></div>
+   <div><img src="assets/images/Vector.png" alt="">  <input type="text" name="" value="{{this.cus}}" [(ngModel)]="cusid" class="input1" id="cusid" readonly></div>
+   <div><img src="assets/images/Vector (1).png" alt=""> <input type="text" name="" class="input1" [(ngModel)]="date" id="cusid"  readonly></div>
+  </div>
+  <div class="formr2">
+   <div><label>Name</label><span  style="color:red;">*</span><br><input type="text" [(ngModel)]="cusname" style="text-transform: capitalize;" class="input2"></div>
+
+   <div><label>Phone No</label><span  style="color:red;">*</span><br><input type="text" [(ngModel)]="cusphno" pattern="[0-9]{10}" maxlength="10" class="input2"></div>
+  </div>
+  <div class="formr3">
+
+    <div><label>Gender</label><span  style="color:red;">*</span><br><select class="input2" [(ngModel)]="cusgender" (click)="select($event)">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+
+    </select></div>
+    <div><label>Location</label><br><input type="text" [(ngModel)]="cusaddress" style="text-transform: capitalize;" class="input2"></div>
+   </div>
+   <div class="formr4">
+    <div><label>Email ID</label><br><input type="text" class="input2" [(ngModel)]="cusmail"></div>
+    <div><label>Instagram ID</label><br><input type="text" class="input2" [(ngModel)]="cusinsta"></div>
+   </div>
+   <div class="formbut">
+   <div> <button class="custosave" (click)="custosave()">Save</button>
+  </div>
+   <div>  <button class="custocancel" (click)="cancelUpdate()">Cancel</button>
+   </div>
+</div>
+
+</div>

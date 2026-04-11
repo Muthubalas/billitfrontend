@@ -1,0 +1,172 @@
+
+
+
+
+.hide{
+  display: none;
+}
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family:lato-light ;
+  src: url(/src/assets/Lato/Lato-Light.ttf);
+}
+.logincard{
+  width:50%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  box-shadow: 0px 0px 12px -6px;
+/*
+  height:50%;
+  width:20%;
+  justify-content: center !important;
+  align-items: center !important; */
+  top: 50%;
+  left: 30%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+}
+.logincard img{
+margin-top: -60px;
+}
+.trail{
+  display: none;
+}
+.logindet{
+
+  /* padding: 50px 36px 50px 36px; */
+  padding: 50px;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
+}
+.inp{
+  width: 400px;
+  height: 40px;
+  border-radius: 6px;
+  border: 1px solid lightgray;
+}
+button{
+  width: 33%;
+  padding: 15px 30px;
+  border: none;
+  background-color:#465DFF;
+  border-radius: 10px;
+  color:#fff;
+}
+h1{
+  text-align: center;
+  font-weight: bold;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.inputrow input {
+  width: calc(100% - 10px);
+  border-radius: 6px;
+  padding: 10px;
+  border: 1px solid #DADADA;
+}
+
+.eye {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%);
+}
+
+
+.body{
+  background-image: url(/src/assets/images/dashboard/Onboard\ Screen.png);
+  background-size: 100% 100%;
+}
+
+.logincontent{
+  padding: 60px;
+  padding-top: 30px;
+}
+.inputrow{
+  margin-top:30px;
+}
+.inputrow label{
+  font-weight: 100 !important;
+  margin-bottom: 5px;
+  font-family: system-ui, sans-serif;
+}
+.form-control {
+  /* font-family: system-ui, sans-serif; */
+  COLOR:#919191;
+  font-size: 15px;
+  margin-top: 1REM;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+  border: none !important;
+  align-items: center;
+}
+.form-control p{
+  margin-bottom: 0;
+}
+
+.logo{
+  width: 285px;
+    height: 98px;
+}
+
+@media only screen and (max-width: 800px){
+.logincard{
+  width: 83%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  border: none;
+  box-shadow: 0px 0px 12px -6px;
+  top: 50%;
+  left: 10%;
+  position: absolute;
+  transition: all ease-in 0.2s;
+  transform: translate(-0%,-50%) ;
+}
+
+}
+@media only screen and (max-width: 440px){
+  .logo{
+    width: 58vw;
+    height: 98px;
+  }
+  button{
+    width: 46%;
+    padding: 15px 20px;
+  }
+  .inputrow label{
+    font-weight: 100 !important;
+    margin-bottom: 5px;
+    font-size: 12px;
+  }
+  .form-control{
+    color: #919191;
+    font-size: 12px;
+  }
+  .validation{
+    font-size: 12px !important;
+  }
+}
+@media only screen and (max-width: 520px){
+  .logincontent{
+    padding: 35px;
+    padding-top: 30px;
+}
+}

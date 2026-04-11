@@ -1,0 +1,91 @@
+
+<div class="trail" id="trail">
+
+  <!-- <app-sidetest></app-sidetest> -->
+  <div class="main-content" style="background-color: #FDFBFE;    width: 100%;height: 100vh;">
+    <app-sidetest  *ngIf="this.role==0"  [ngClass]="{'isOpen1': isOpen1}"></app-sidetest>
+    <app-sidenavbar  *ngIf="this.role==1"  [ngClass]="{'isOpen1': isOpen1}"></app-sidenavbar>
+    <div class="top20">
+      <!-- <div> -->
+      <h1 class="heading">Day Report</h1>
+    <!-- </div> -->
+      <div class="rightop">
+
+        <div>
+          <button class="billbut" (click)="toggleDropdown()"><img src="assets/images/fi_1159922.png" alt="">&nbsp;Create Bill</button>
+          <div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+            <div (click)="servebill()" class="repnav side"> Service </div><br>
+            <div (click)="probill()" class="repnav side"> Product </div><br>
+
+          </div>
+        </div>
+
+
+<div>
+        <div class="profile" (click)="toggleDropdown1()">
+         <div class="propic">
+           <img src="assets/images/Profile icon.png" alt="">
+
+         </div>
+         <h1 class="proname">{{this.profilerole}}</h1>
+         <i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;"></i>
+        </div>
+        <div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+          <div  class="repnav" (click)="editprofile()"> Edit Profile</div><br>
+          <div class="repnav" (click)="logout()"> Log out </div><br>
+        </div>
+        </div>
+           </div>
+
+      </div>
+      <div class="reportdetails">
+
+        <div class="reportinputs">
+          <div class="picker">
+
+<div><label class="label1 mb-2">Year </label><br>
+<!-- <input type="text" name="" id="" value="{{this.selectedYear}}" class="repinp1" disabled></div> -->
+<select name="" id="" class="repinp1" [(ngModel)]="selectedYear" (change)="yearchange($event)">
+  <option *ngFor="let year of yearList" [value]="year">{{ year }}</option>
+</select>
+</div>
+          <div><label class="label1 mb-2">Month </label><br><select  [(ngModel)]="selectedMonth" (ngModelChange)="onMonthChange()" name="selectedMonth" id="selectedMonth" class="repinp1">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select></div>
+
+</div>
+<div class="exportTotal">
+  <div class="totalamount"><label for="">Total Sales</label><br>
+
+    <input type="text" name="" id="" class="totalsales mt-2" value="₹ {{this.monthtotal}}" readonly></div>
+       <div>
+        <div class="totalamount"><label for="" style="visibility: hidden;">Total Sales</label><br>
+
+          <!-- <input type="text" name="" id="" class="export mt-2"  (click)="exportToExcel()" value="Export" readonly></div> -->
+          <button  class="export mt-2"   [disabled]="role !== '0'" [ngClass]="{'disabled-btn': role !== '0'}" (click)="exportToExcel()" value="Export" >Export</button>
+        <!-- <button (click)="exportToExcel()">save</button> -->
+      </div>
+       </div>
+
+
+  </div>
+  <div class="chartBox">
+    <div class="colarge">
+    <div class="box">
+    <canvas class="daychart"></canvas>
+    </div>
+    </div>
+  </div>
+  </div>
+  </div>

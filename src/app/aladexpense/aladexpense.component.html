@@ -1,0 +1,22 @@
+<div class="form">
+
+  <div class="row1">
+    <div><label for="" class="mb-2">Expense</label><span  style="color:red;">*</span> <br>
+      <input type="text" name="" id="" class="adminpt" [(ngModel)]="name">
+
+    </div>
+    <div><label for="" class="mb-2">Cost</label><span  style="color:red;">*</span> <br>
+      <input type="number" name="" id="" class="adminpt" [(ngModel)]="amount">
+  </div>
+  </div>
+  <div class="row2">
+    <div><label for="" class="mb-2">Date</label> <br> <input type="date" class="adminpt" [max]="getMinimumDate()"  [(ngModel)]="date" (change)="changedate($event)" ></div>
+  <!-- <div><label for="" class="mb-2">Date</label> <br> <input type="text" class="adminpt" id="date" [(ngModel)]="date" readonly></div> -->
+   <div><label for="" class="mb-2">Category </label> <span  style="color:red;">*</span><br><input type="test" name="" id="" class="adminpt" [(ngModel)]="description"></div>
+  </div>
+  <div class="formbut">
+    <div> <button class="custosave" (click)="saveExpense()">Save</button></div>
+    <div>  <button class="custocancel" (click)="cancelUpdate()">Cancel</button>
+    </div>
+</div>
+</div>

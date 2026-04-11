@@ -1,0 +1,101 @@
+<div  mat-dialog-content>
+    <div class="popup">
+      <form [formGroup]="appointment">
+    
+  <div class="idet">
+  <div class="f1">
+  <label for="customer_name">Customer Name</label><span  style="color:red;">*</span><br>
+  <input type="text" style="text-transform: capitalize;"  formControlName="customer_name" class="inp1" ><br>
+  <span  style="color:red;" *ngIf="customerName && customerName.invalid && customerName.touched">*Customer Name  is required</span><br>
+  </div>
+  <div>
+  <label for="gender">Gender</label><span  style="color:red;">*</span><br>
+  <select name="" id=""  (change)="select($event)"  formControlName="gender" class="inp1">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select><br>
+  <span  style="color:red;" *ngIf="gender && gender.invalid && gender.touched">*Gender  is required</span><br>
+  </div>
+  </div>
+  <div class="idet1">
+    <div class="f1">
+    <label for="service">Service</label><br>
+    <!-- <input type="text" formControlName="service" class="inp1"><br> -->
+     <!-- ------------------------ -->
+     <input type="text" class="form-control"  placeholder="Search" [(ngModel)]="data.prod" list="datal" (input)="selectserv(i,$event)">
+            <datalist id="datal">
+                <option *ngFor="let item of filteredServices " [ngValue]="item">{{item.service_name}}</option>
+            </datalist>
+            <div class="ng-autocomplete" class="selectinp">
+            <ng-autocomplete [data]="getservice"
+            [searchKeyword]="keyword"
+            placeholder="Search"
+          
+            [customFilter]="customFilter"
+            (inputChanged)=" onchangesearch($event)"
+            (inputFocused)="onfocused($event)"
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.service_name"></a>
+
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+                <a [innerHTML]="notFound"></a>
+            </ng-template>
+          </div>
+     <!-- ------------------------------- -->
+ 
+    <span  style="color:red;" *ngIf="service && service.invalid && service.touched">*Service  is required</span><br>
+    </div>
+    
+    <div>
+      <label for="phone">Phone</label><span style="color:red;">*</span><br>
+      <input type="number" formControlName="phone" class="inp1"><br>
+      <span  style="color:red;" *ngIf="phone && phone.invalid && phone.touched">*Number  is required</span><br>
+    </div>
+ 
+    </div>
+    <div class="idet1">
+      <div>
+        <label for="date_time">Date and Time</label><span style="color:red;">*</span><br>
+        <input type="datetime-local" formControlName="date_time" class="inp1"><br>
+        <span  style="color:red;" *ngIf="dateTime && dateTime.invalid && dateTime.touched">*Date  is required</span><br>
+           
+    </div>
+    
+      
+      <div>
+        <label for="location">Location</label><span style="color:red;">*</span><br>
+        <input type="text" formControlName="location" class="inp1"><br>
+        <span  style="color:red;" *ngIf="location && location.invalid && location.touched">*Location  is required</span><br>
+      </div>
+    </div>
+    <div class="idet1">
+      <div>
+        <label for="staffname">Staff name</label><span style="color:red;">*</span><br>
+        <input type="text" formControlName="staffname" class="inp1"><br>
+        <span  style="color:red;" *ngIf="staffname && staffname.invalid && staffname.touched">*Staff name  is required</span><br>
+      </div>
+      
+      <div>
+        <label for="status">Status</label><span style="color:red;">*</span><br>
+        <select name="" id=""  (change)="select($event)"  formControlName="status" class="inp1">
+          <option value="Pending">Pending</option>
+          <option value="Inprogress">Inprogress</option>
+          <option value="Completed">Completed</option>
+        </select><br>
+        <span  style="color:red;" *ngIf="appointmentStatus && appointmentStatus.invalid && appointmentStatus.touched">*Status  is required</span><br>
+      </div>
+    </div>
+  <div class="buttons">
+    <div><button class="save"  type="button"   data-bs-dismiss="modal" id="addbutton" (click)="addappointment()">{{actionbtn}}</button></div>
+   <div> <button class="cancel" type="submit" (click)="cancelUpdate()">Cancel</button></div>
+    </div>
+    </form>
+  </div>
+  </div>
+  
+  

@@ -1,0 +1,386 @@
+<body>
+
+
+
+  <div class="trail" id="trail">
+
+    <div class="main-content">
+
+      <div class="fix">
+        <app-sidetest [isOpen]="sideNavOpen" *ngIf="this.role==0" (toggle)="toggleSideNav()"></app-sidetest>
+        <app-sidenavbar [isOpen]="sideNavOpen" *ngIf="this.role==1" (toggle)="toggleSideNav()"></app-sidenavbar>
+  <div class="top1" id="top1">
+    <h1 class="heading">Service Billing</h1>
+    <div class="rightop">
+
+      <div>
+        <button class="billbut" (click)="toggleDropdown()"><img src="assets/images/fi_1159922.png" alt="">&nbsp;Create Bill</button>
+        <div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+
+         <div (click)="probill()"  class="repnav"> <a>Product </a></div><br>
+
+        </div>
+      </div>
+  <div>
+      <div class="profile" (click)="toggleDropdown1()">
+       <div class="propic">
+         <img src="assets/images/Profile icon.png" alt="">
+
+       </div>
+       <h1 class="proname">{{this.profilerole}} </h1>
+       <i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;"></i>
+      </div>
+      <div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+        <div  class="repnav side" (click)="editprofile()"> Edit Profile</div><br>
+        <div class="repnav side" (click)="logout()"> Log out </div><br>
+      </div>
+      </div>
+         </div>
+
+    </div>
+    </div>
+    <div class="probilldetail" id="probilldetail">
+
+      <div class="pror1">
+        <div class="smallinp">
+        <div> <label for="" class="cusname">Invoice no</label><br>
+          <input type="text" class="proinp2 mt-2" id="invno" value="{{this.getservbillids}}" readonly>
+            </div>
+            <div> <label for="" class="cusname">Date</label><br>
+              <input type="date" class="proinp2 mt-2" id="date" [(ngModel)]="currentDate" [max]="minDate" (change)="changedate($event)">
+                </div>
+              </div>
+              <div class="biginp">
+     <div ><label for="" class="cusname">Phone no</label><span style="color:red;">*</span><br>
+      <input type="text" name="" class="proinp2 mt-2" [(ngModel)]="customer_phone" (input)="getdata()">
+
+
+      </div>
+      <div class="mem">
+      <div>
+        <label for="" class="cusname">Customer name</label><span  style="color:red;">*</span><br>
+        <input type="text" name="" class="proinp2 mt-2" id="" [(ngModel)]="customer_name" readonly [disabled]="isDisabled">
+      </div>
+      <div class="addcusto"></div>
+
+      </div>
+      <div class="mem">
+        <div class="member">
+          <div style="display: flex;gap: 10px;">
+            <div class="plu1s" (click)="updatemem()">
+
+            </div>
+        <div for=""><img src="assets/images/noto_crown.png" alt=""></div><div  style="color: #F19534;
+
+        font-family: Lato;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;">Membership ID</div>
+        </div>
+          <input type="text" name="" class="proinp2 mt-2" id="" [disabled]="isDisabled" [(ngModel)]="membership_no">
+        </div>
+        <div class="plus" (click)="updatemem()">
+
+        </div>
+        </div>
+        </div>
+  </div>
+  <div class="custotable">
+  <table>
+  <thead style="border-radius: 20px;width: 97%;
+  height: 50.775px;border-radius: 20px;
+  border: 1px solid #EEE;
+
+  background: #F0F9FF">
+                  <tr style="width: 97%;">
+                    <th class="cushead">SN </th>
+                    <th class="cushead">Service name<span style="color:red;">*</span></th>
+                    <th class="cushead">Gender<span style="color:red;">*</span></th>
+                    <th class="cushead">Staff name<span style="color:red;">*</span></th>
+                    <th class="cushead">Quantity</th>
+                    <th class="cushead">Cost</th>
+                    <th class="cushead">Discount(%)</th>
+                    <th class="cushead">Total</th>
+                    <th class="cushead"></th>
+
+
+
+      </tr>
+
+      </thead>
+
+      <div style="background-color: #F4F7FE; height: 8px;width: 100%;">
+      <tbody  >
+        <tr>
+        <td class="t2"></td>
+        <td class="t2"></td>
+        <td class="t2"></td>
+        <td class="t2"></td>
+        <td class="t2"></td>
+        <td class="t2"></td>
+        <td class="t2"></td>
+
+      </tr>
+      </tbody>
+     </div>
+  <tbody>
+     <tr style="border-radius: 20px;
+        height: 50.775px;border: 1px solid #EEE;" *ngFor="let data of item; let i = index" class="tr" >
+
+          <td class="cusbody">{{i+1}}</td>
+          <td class="cusbody">
+            <input type="text" class="form-control"  placeholder="Search" [(ngModel)]="data.prod" list="datal" (input)="selectserv(i,$event)">
+            <datalist id="datal">
+                <option *ngFor="let item of filteredServices " [ngValue]="item">{{item.service_name}}</option>
+            </datalist>
+            <div class="ng-autocomplete" class="selectinp">
+            <ng-autocomplete [data]="getservice"
+            [searchKeyword]="keyword"
+            placeholder="Search"
+            [(ngModel)]="data.prod"
+            (selected)="selectevent(i,$event)"
+            [customFilter]="customFilter"
+            (inputChanged)=" onchangesearch($event)"
+            (inputFocused)="onfocused($event)"
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+
+            </ng-autocomplete>
+            <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.service_name"></a>
+
+            </ng-template>
+            <ng-template #notFoundTemplate let-notFound>
+                <a [innerHTML]="notFound"></a>
+            </ng-template>
+          </div>
+        </td>
+        <td class="cusbody1">
+
+          <select id="country" class="tableinp" [(ngModel)]="data.selectedgender" name="country" (change)="ongenderSelection(i,$event)">
+           <option value="Male">Male</option>
+           <option value="Female">Female</option>
+          </select>
+
+                </td>
+  <td class="cusbody1">
+
+    <select id="country" class="tableinp" [(ngModel)]="data.selectedStaff" name="country" (change)="onStaffSelection(i,data)">
+      <option *ngFor="let staff of getstafflist"  [value]="staff.name + ' ' + staff.initial">{{ staff.name }} {{staff.initial}}</option>
+    </select>
+
+          </td>
+          <td class="cusbody"><input type="number" class="tableinp1"  [(ngModel)]="data.quantity"  min="1" (input)="Quantity(i, data)"></td>
+          <td class="cusbody"><input type="number" class="tableinp2 cusbody" id="service_cost" [(ngModel)]="data.cost" min="0" (ngModelChange)="onServiceCostChange(i, data)" ></td>
+
+          <td class="cusbody"><input type="number" class="tableinp1 prodiscount" [(ngModel)]="data.prodisc" min="0"  (input)="prodis(i, data)" id=""></td>
+
+          <td class="cusbody">{{data.amount}}</td>
+
+          <td class="cusbody"><img src="assets/images/trash-2.png"  (click)="deleteRow(i)" alt=""></td>
+
+        </tr>
+
+
+  </tbody>
+    </table>
+    </div>
+    <div class="pay">
+
+  <button style="width: 100.137px;
+
+  height: 34.442px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #039F2F;;border: none;" (click)="addRow() ">
+  <div class="additem" style="display: flex;gap: 10px;color: #08224A;align-items: center;
+  text-align: center !important;
+  color:#fff;
+  margin-left: 15px;
+  font-family: Lato;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;">
+  <div><i class="fa fa-plus-square-o" aria-hidden="true"></i></div><div>Add Item</div></div></button>
+
+
+  <div class="payment" [style.height.px]="showpay ? dynamicHeight : defaultHeight">
+  <div class="paymentdetail">
+  <div style="display: flex;justify-content: space-between;">
+  <div class="payhead">Sub total</div><div class="money">{{subtotal}}</div></div>
+  <hr class="hr mt-3 mb-3">
+
+  <div style="display: flex;justify-content: space-between;">
+  <div  class="payhead">GST</div><div  class="support"><input type="number" class="payinp2" min="0" (input)="changegst()" [(ngModel)]="gstrate">%</div><div class="money">{{roundgst}}</div>
+  </div>
+  <hr class="hr mt-2 mb-3">
+  <div *ngIf="showpay">
+    <div style="display: flex;justify-content: space-between;">
+      <div  class="payhead">Cash</div><div  class="support"></div><div class="money"><input type="number" class="cashandgpay" (input)="updateCash()" [(ngModel)]="cash" name="" id=""></div>
+      </div>
+      <hr class="hr mt-2 mb-3">
+      <div style="display: flex;justify-content: space-between;">
+        <div  class="payhead">UPI</div><div  class="support"></div><div class="money"><input type="number" class="cashandgpay" (input)="updateUPI()" [(ngModel)]="upi" name="" id=""></div>
+        </div>
+        <hr class="hr mt-2 mb-3">
+        </div>
+  <div style="display: flex;justify-content: space-between;">
+  <div style="color: #3B4B64;
+
+  font-family: Lato;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;">Grand total</div><div >{{grandtotal}}</div></div>
+  <hr class="hr1 ms-4 mt-3 mb-3">
+  <div class="paybuttons">
+    <div class="paymoderow">
+    <div class="paymodehead">Payment mode : </div>
+    <div><select name="" id="" class="paymode" (change)="selectpay($event)"  [(ngModel)]="payMode">
+      <option value="" disabled selected>Select payment method</option>
+      <option value="Card">Card</option>
+      <option value="Cash">Cash</option>
+      <option value="UPI">UPI</option>
+      <option value="cash and upi">Cash and UPI</option>
+      </select></div></div>
+      <div class="bills">
+        <div>
+          <!-- <button class="paybutton1" (click)="printservbill()">Print Bill</button> -->
+          <!-- <button class="paybutton3" (click)="printservbill1()">Print Bill</button></div> -->
+          <button class="paybutton3" (click)="printBill()">Print Bill</button></div>
+          <div>
+             <!-- <button  class="paybutton2" (click)="sendServBill()">Send Bill</button> -->
+            <button  class="paybutton4" (click)="sendServBill1()">Send Bill</button>
+  </div>
+  </div>
+  </div>
+
+  </div>
+  </div>
+    </div>
+
+    <div id="print-space" #pdfContent >
+      <div id="internal-print-space">
+        <div *ngIf="memoriesaddr">
+          <p class="print-main-text">Memories salon</p>
+          <p class="print-common-text">5/353, First Floor, near CTS,</p>
+          <p class="print-common-text">Thoraipakkam, Chennai - 600097</p>
+          <p class="print-common-text">Landmark : Okkiyampet signal</p>
+          <p class="print-common-text">Mob : 098842 68868</p>
+          <p class="print-common-text">GSTIN - 33ALRPJ6077C1Z0</p>
+    </div>
+    <div *ngIf="marvelmanapakaddr">
+      <p class="print-main-text">Marvel Salon</p>
+      <p class="print-common-text">No 1,First Floor,</p>
+      <p class="print-common-text">Ramachandra Colony</p>
+      <p class="print-common-text">Mugalivakkam Road,</p>
+      <p class="print-common-text">Manapakkam, Chennai-600 125.</p>
+      <p class="print-common-text">Land mark : Opp to Krishna Court </p>
+      <p class="print-common-text">Phone No : 75500 65733</p>
+        <p class="print-common-text">GSTIN - 33AEWPJ1572L1Z1</p>
+    </div>
+    <div *ngIf="marvelomraddr">
+      <p class="print-main-text">Marvel Salon</p>
+      <p class="print-common-text">3/429,First Floor,</p>
+      <p class="print-common-text">Mettukuppam Bus Stop Thoraipakkam</p>
+      <p class="print-common-text">OMR Food Street, Near by NJK Avenue Old Mahaballipuram Road, SH 49A,</p>
+      <p class="print-common-text"> Chennai, Tamil Nadu 600097</p>
+    </div>
+    <div *ngIf="marvelannanagar">
+      <p class="print-main-text">Marvel Salon</p>
+      <p class="print-common-text">1, Krishna Flats, 13th St, </p>
+      <p class="print-common-text">Z Block, G Block, Annanagar East</p>
+      <p class="print-common-text">Chennai, Tamil Nadu 600040</p>
+      <p class="print-common-text">Phone No : 73056 37101</p>
+    </div>
+    <div *ngIf="rainbowmedia">
+      <p class="print-main-text">Raibow Media</p>
+      <p class="print-common-text">Old.No. 83, New no.112, </p>
+      <p class="print-common-text">2nd floor, Anna salai, Manickam lane</p>
+      <p class="print-common-text">Guindy, Chennai-600032</p>
+      <p class="print-common-text">Phone No : 7305821333</p>
+    </div>
+    <div *ngIf="dsaloon">
+      <p class="print-main-text">D Saloon</p>
+      <p class="print-common-text">New tone building, 472/21, Kilpauk Garden Road </p>
+      <p class="print-common-text">Aspiran Garden Colony,Kilpauk</p>
+      <p class="print-common-text">Chennai, Tamil Nadu 600010</p>
+      <!-- <p class="print-common-text">Phone No : 7305821333</p> -->
+    </div>
+    <div *ngIf="marvelselaiyur">
+  
+      <p class="print-main-text">Marvel Salon</p>
+      <p class="print-common-text">No-19, MC Builders,First Floor, </p>
+      <p class="print-common-text">Shirdi Sai Nagar,Thiruvanchery,</p>
+      <p class="print-common-text"> Selaiyur, Chennai-600073</p>
+      <p class="print-common-text">Phone No:7305699399</p>
+    </div>
+    <div *ngIf="marvelvelachery">
+     
+      <p class="print-main-text">Marvel Salon</p>
+      <p class="print-common-text"> Plot 29, 5th St, Tansi Nagar,</p>
+      <p class="print-common-text">Velachery, Chennai,</p>
+      <p class="print-common-text"> Tamil Nadu-600042</p>
+      <p class="print-common-text">Phone No:7448884546</p>
+      
+    </div>
+      <div *ngIf="blush">
+     
+      <p class="print-main-text">Blush Unisex Salon</p>
+      <p class="print-common-text"> Shop no 4 29, 1st floor,Esspee tower</p>
+      <p class="print-common-text">Dattapada road,Opp.Oberoi sky city</p>
+      <p class="print-common-text"> Borivali east,Mumbai-400066</p>
+      <p class="print-common-text">Phone No:9920097002</p>
+      
+    </div>
+        <div class="print-data-section">
+          <p class="print-common-text">Bill No&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;<span id="invNoSpan">{{this.getservbillids}}</span></p>
+          <p class="print-common-text">Date &nbsp;&emsp;:&emsp;<span id="dtSpan">{{datapipe.transform(currentDate,'dd-MM-YYYY')}}</span></p>
+          <p class="print-common-text">Customer&emsp;&emsp;&nbsp;&nbsp;:&emsp;<span id="custSpan">{{this.customer_name}}</span></p>
+          <p class="print-common-text">Membership id&emsp;&emsp;&nbsp;&nbsp;:&emsp;{{membership_no}}</p>
+          <p class="print-common-text">Mobile No&emsp;&emsp;:&emsp;<span id="mobSpan">{{this.customer_phone}}</span></p>
+          <table>
+            <thead>
+              <tr>
+                <th>Service Name</th>
+                <th>Cost</th>
+                <th>Qty</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <!-- <hr style="width: 40px;"> -->
+            <tbody id="tbody">
+
+                <tr *ngFor="let item of item">
+                  <td >{{ item.prod }}</td>
+                  <td>{{ item.cost }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.amount }}</td>
+                </tr>
+              </tbody>
+
+          </table>
+
+          <div class="calc">
+            <p class="print-common-text tga">Total Gross Amount</p><span id="colon">:</span><span id="grossSpan">{{this.subtotal}}</span></div>
+
+            <div class="calc"><p class="print-common-text tga">GST ({{gstrate}}%) </p><span id="colon">:</span><span id="gstSpan">{{this.roundgst}}</span></div>
+
+            <div class="calc" style="margin: 10px 0;"><p class="print-common-text na">Net Amount</p><span id="colon">:</span><span id="netSpan">{{this.grandtotal}}</span></div>
+        </div>
+        <div class="print-meta-data">
+          <div *ngIf="onlinepay">
+            <p class="print-common-text">Cash&emsp;:&emsp;<span id="paySpan">{{this.cash}}</span></p>
+            <p class="print-common-text">UPI&emsp;:&emsp;<span id="paySpan">{{this.upi}}</span></p>
+          </div>
+          <p class="print-common-text">Pay Mode&emsp;:&emsp;<span id="paySpan">{{this.selectpaymode}}</span></p>
+          <p class="print-common-text" id="thank">Thank You</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    </div>

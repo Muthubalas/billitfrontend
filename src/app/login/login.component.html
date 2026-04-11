@@ -1,0 +1,46 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body class="body" style="background-image: url(assets/images/dashboard/Onboard\ Screen.png);background-repeat: no-repeat;background-size:100% 100%;">
+
+  <div class="logincard" style="text-align: center;">
+    <img src="assets/images/Group 22507.png" style="width: 285px;
+    height: 98px;" alt="">
+    <div class="logincontent" style="text-align: left;">
+      <form action="" [formGroup]="loginform">
+      <div class="inputrow">
+        <label for="">Username</label><br>
+        <input formControlName="email"  type="email" name="email" id="email" value="">
+        <span  style="color:red;" *ngIf="email && email.invalid && email.touched">*Username  is required</span><br>
+      </div>
+     <!-- ... your existing HTML code ... -->
+<div class="inputrow">
+  <label for="">Password</label><br>
+  <div class="password-container">
+    <input formControlName="password" [type]="changetype?'password':'text'" name="password" id="password">
+    <span class="eye" (click)="view()"><i [ngClass]="visible?'fa fa-eye-slash':'fa fa-eye'" style="cursor: pointer;"></i></span>
+  </div>
+  <span style="color:red;" *ngIf="password && password.invalid && password.touched">*Password is required</span><br>
+</div>
+<!-- ... your existing HTML code ... -->
+
+      <label class="form-control">
+        <input type="checkbox" formControlName="check" name="checkbox" />
+        <p>I have read and agreed to the <span style="color:#EB1E1E">Terms and Conditions*</span></p>
+      </label>
+      <span  style="color:red;" *ngIf="check && check.invalid && check.touched">*product type  is required</span><br>
+</form>
+      <div class="inputrow">
+        <button (click)="login()">Login</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

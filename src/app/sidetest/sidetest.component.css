@@ -1,0 +1,289 @@
+.siden-isOpen button{
+  margin-left: 30px;
+  }
+
+  .hello{
+  float: right;
+  }
+  .siden .logodet{
+    height:60px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 50px;
+    }
+    /* .siden .logodet img{
+      font-size: 30px;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    min-width: 50px;
+    position: relative;
+
+    } */
+    #fa1{
+      margin-left: 20px;
+    }
+    #fa2{
+      margin-left: 5px;
+    }
+    .siden .navlist{
+  margin-left: -30px;
+      padding-top:3px ;
+      }
+      .siden .navlist li{
+      position: relative;
+      cursor: pointer;
+      list-style: none;
+      transition: all 0.4s ease;
+      }
+      .siden .navlist li i{
+        height:50px;
+        min-width:100px;
+        text-align: center;
+        line-height: 50px;
+        color: white;
+        transition: all 0.3s ease;
+        }
+        .sidebar .navlist li i{
+          height:50px;
+          min-width:100px;
+          text-align: center;
+          line-height: 50px;
+          color: white;
+          transition: all 0.3s ease;
+          }
+
+          .sidebar-closed .navlist li .suby{
+            padding: 6px 6px 14px 73px;
+            margin-top: -10px;
+            background-color:#071836;
+          }
+          .sidebar-closed .navlist li .suby1{
+            padding: 6px 6px 14px 73px;
+            margin-top: -10px;
+            background-color:#071836;
+          }
+          .siden[_ngcontent-sul-c80] .navlist[_ngcontent-sul-c80] li[_ngcontent-sul-c80] .suby1[_ngcontent-sul-c80] a[_ngcontent-sul-c80] {
+            color: #CDCDCD;
+            font-family: Lato;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            padding: 11px 65px;
+        }
+        .siden .navlist li .suby1{
+
+
+          /* margin-top: -10px; */
+          margin-left: -10px;
+          background-color:#071836;
+        }
+        .siden .navlist li .suby1 a{
+          color: #CDCDCD;
+          font-family: Lato;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+         padding: 10px 63px;
+        }
+        .siden .navlist li .suby2 a{
+          color: #CDCDCD;
+          font-family: Lato;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+         padding: 9px 53px;
+        }
+        .siden .navlist li .suby2{
+
+
+          /* margin-top: -10px; */
+          margin-left: -10px;
+          background-color:#071836;
+        }
+
+          .siden .navlist li .suby{
+
+            margin-left: -5px;
+            /* margin-top: -10px; */
+            background-color:#071836;
+          }
+          .siden .navlist li .suby a{
+            color: #CDCDCD;
+            font-family: Lato;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+           padding: 9px 73px;
+          }
+          .siden .navlist li .suby1 a{
+            color: #CDCDCD;
+            font-family: Lato;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+           padding: 9px 46px;
+          }
+          .siden.navlist li .iconlink{
+            display: flex;
+            align-items: center;
+            gap: 100px;
+            justify-content: space-between !important;
+          }
+          .siden.navlist.iconlink .submenu ul li a{
+          text-align: center !important;
+          align-items: center !important;
+          justify-content: center !important;
+          }
+          .siden .navlist li a {
+            display: flex;
+            align-items: center;
+          text-decoration: none;
+
+          }
+          .active {
+            background-color: white;
+            color: #5041BC !important;
+            fill: #5041BC !important;
+          }
+          .sactive{
+            color: #5041BC !important;
+          }
+          #s1{
+            width: 24.848px !important;
+            height: 24.883px !important;
+          }
+          #s5{
+            width: 24.848px !important;
+            height: 24.883px !important;
+            margin-top: 2px;
+          }
+          #svg{
+            padding:16px 0;
+          }
+          .siden .navlist li svg{
+            /* height:100px !important; */
+            min-width:100px;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+            transition: all 0.3s ease;
+            }
+
+          .sidebar .navlist li a .navi{
+          font-size:15px;
+          font-weight: bold;
+          color: #F4F7FE;
+          }
+          .sidebar .navlist li .submenu{
+            /* padding:6px 6px 14px 80px; */
+            padding:14px 56px;
+
+            margin-top:-10px;
+            width: 185px;
+            margin-left: 20px;
+            /* width: 200px;
+          height: 108px; */
+          border-radius: 20px;
+            background-color:#4166A0;
+
+          }
+
+          .siden .navlist li a .navi{
+            font-size:15px;
+            font-weight: 500;
+            color: #F4F7FE;
+            }
+          .active .icon1 path {
+            fill: #5041BC !important;
+              /* fill: yellow; Change to the desired color on hover */
+            }
+
+
+
+
+
+            .hamburger-icon {
+              display: none;
+
+
+              background: none;
+              border: none;
+              font-size: 24px;
+              cursor: pointer;
+            }
+
+            @media (max-width: 768px) {
+              .siden {
+                margin-top: 30px;
+                width: 100px;
+                display: none;
+              }
+
+              .hamburger-icon {
+                position: fixed;
+                display: block;
+              }
+
+              .siden.isOpen1 {
+                width: 247px;
+                margin-top: 30px;
+                display: block;
+              }
+
+
+              .content {
+                margin-left: 0;
+              }
+            }
+
+            @media (min-width: 769px) {
+              .siden {
+                display: block;
+              }
+            }
+
+            ::-webkit-scrollbar {
+              width: 10px;
+            }
+            .scroll1::-webkit-scrollbar {
+              height: 10px; /* Adjust this value to set the width of the scrollbar */
+            }
+
+            .scroll1::-webkit-scrollbar-track {
+              box-shadow: inset 0 0 5px grey;
+              border-radius: 10px;
+            }
+
+            .scroll1::-webkit-scrollbar-thumb {
+              background: #A5A5A5;
+              border-radius: 10px;
+            }
+
+            .scroll1::-webkit-scrollbar-thumb:hover {
+              background: #1F4681;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+              box-shadow: inset 0 0 5px grey;
+              border-radius: 10px;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+              background: #A5A5A5;
+              border-radius: 10px;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+              background: #1F4681;
+            }

@@ -1,0 +1,64 @@
+
+
+<div  mat-dialog-content>
+  <div class="popup">
+    <form  [formGroup]="product">
+    <div class="idimg">
+  <div class="proid">
+<img src="assets/images/Vector.png" class="productid" alt="">
+<input type="text" formControlName="id" class="id" id="productid" value="{{this.pros}}" readonly>
+
+</div>
+
+<!-- <img src="assets/images/fi_781720.png" alt=""> -->
+</div>
+<div class="idet">
+<div class="f1">
+<label for="">Product Name</label><span  style="color:red;">*</span><br>
+
+<input type="text"  formControlName="name" class="inp1" style="text-transform: capitalize;" ><br>
+</div>
+<div>
+
+  <label for="">Category</label><span  style="color:red;">*</span><br>
+
+  <input type="text"  formControlName="category" class="inp1" style="text-transform: capitalize;"><br>
+
+</div>
+</div>
+<div class="idet1">
+  <div class="f1">
+  <label for="">Cost</label><span  style="color:red;">*</span><br>
+
+  <input type="number" formControlName="price" class="inp1">
+  </div>
+
+  <div>
+    <label for="">Quantity</label><span  style="color:red;">*</span><br>
+    <input type="number" formControlName="quantity" class="inp1"><br>
+
+    </div>
+  </div>
+  <div class="idet1">
+    <div>
+      <label for="">Type</label><span  style="color:red;">*</span><br>
+      <select name="" id=""  (change)="selectcategory($event)"  formControlName="type" class="inp1">
+        <option value="Retail">Retail</option>
+        <option value="Salon">Salon</option>
+
+      </select>
+      </div>
+    <div class="f1">
+    <label for="">Description</label><br>
+    <input type="text" formControlName="description" class="inp1">
+    </div>
+
+
+    </div>
+    <div class="buttons">
+      <button class="save"  type="button"  data-bs-dismiss="modal" (click)="updatepro()" >Update</button>
+      <button class="cancel" type="button" (click)="cancelUpdate()">Cancel</button>
+      </div>
+  </form>
+</div>
+</div>

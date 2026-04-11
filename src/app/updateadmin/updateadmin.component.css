@@ -1,0 +1,168 @@
+.adminpt{
+  width: 297px;
+  height: 44px;
+flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+padding: 0 10px;
+background: #FFF;
+}
+.select{
+  width: 297px;
+  height: 44px;
+flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+/* padding: 0 10px; */
+background: #FFF;
+}
+.row3{
+  margin-top: 17px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 33px;
+  gap: 93px;
+}
+label{
+  color: #3B4B64;
+
+  font-family: Lato;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.row1{
+  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    width: 97%;
+    gap: 81px;
+}
+#name{
+  margin-left: 20px;
+}
+.row2{
+  width: 100%;
+}
+.row2{
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* gap: 50px; */
+}
+/* .row3{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+} */
+/* .row2{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  margin-left:37px;
+} */
+.form{
+  margin-top: 30px;
+}
+.custosave{
+  width: 130px;
+  height: 45px;
+flex-shrink: 0;
+border-radius: 8px;
+border: 1px solid #E2E2E2;
+color: #FFF;
+
+font-family: Lato;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+
+background: #0D99FF;
+}
+
+.custocancel{
+  width: 130px;
+  height: 45px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #E2E2E2;
+
+  background: #EFECEC;
+
+font-family: Lato;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+background: #EFECEC;
+}
+.formbut{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 27px;
+}
+.eye{
+  position: relative;
+  right: 35px;
+}
+
+
+ @media screen and (max-width: 768px){
+  .row1{
+
+      width: 100%;
+
+  }
+  #name{
+    margin-left: 0px
+  }
+  .row1,.row2,.row3{
+    flex-wrap: nowrap;
+    /* display: block; */
+    gap: 14px;
+    flex-direction: column;
+  }
+.adminpt{
+    width: 100%;
+}
+.select{
+  width: 100%;
+}
+.pass{
+  display: flex;
+}
+.eye{
+
+    position: relative;
+    left: 86%;
+    top: -33px;
+}
+.row3{
+  justify-content: space-around;
+}
+.formbut{
+  gap:8px
+}
+.row2,.row3{
+  margin-left: 0px;
+}
+.row2{
+  margin-top: 15px;
+  gap: 5px;
+}
+.form{
+  margin-top: 12px;
+}
+}
+@media screen and (max-width: 396px){
+.custocancel,.custosave{
+  width: 100px;
+}
+}

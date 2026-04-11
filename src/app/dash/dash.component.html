@@ -1,0 +1,435 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div class="trail" id="trail">
+
+
+    <div class="main-content" style="background-color: #F4F7FE;width: 150%;height: 100vh;">
+
+
+  <div class="p1">
+
+  <div class="base">
+    <div class="topmenu">
+      <div class="topbar"  >
+
+<app-sidetest *ngIf="this.userRole==0" [ngClass]="{'isOpen1': isOpen1}"></app-sidetest>
+<app-sidenavbar  *ngIf="this.userRole==1" [ngClass]="{'isOpen1': isOpen1}"></app-sidenavbar>
+  <div class="page" >
+    <div class="top20" >
+      <div class="head">
+    <h1 class="heading" style="font-weight: 700;">Overview</h1></div>
+    <div class="rightop">
+<div>
+<button class="billbut"  (click)="toggleDropdown()"><img src="assets/images/fi_1159922.png" alt="">&nbsp;Create Bill</button>
+<div class="dropdown-content" [ngClass]="{ 'show': isDropdownOpen }">
+  <div (click)="servebill()" class="repnav"> Service</div><br>
+  <div (click)="probill()" class="repnav"> Product </div><br>
+</div>
+</div>
+
+ <div class="profile"  (click)="toggleDropdown1()">
+  <div class="propic">
+    <img src="assets/images/Profile icon.png" alt="">
+
+  </div>
+  <h1 class="proname">{{this.profilerole}}</h1>
+  <i class="fa fa-caret-down" aria-hidden="true" style="margin-top: 10px;color: #5041BC;" ></i>
+ </div>
+ <div class="dropdown-content1" [ngClass]="{ 'show': isDropdownOpen1 }">
+  <div  class="repnav side" (click)="editprofile()"> Edit Profile</div><br>
+  <div class="repnav side" (click)="logout()"> Log out </div><br>
+</div>
+    </div>
+
+
+    </div>
+  </div>
+ </div>
+  </div>
+
+  <div class="details1 ">
+   <div class="cardheadings" style="color: #000; font-size: 18px; font-weight: 500;">Today</div>
+     <div class="cards">
+
+    <div class=" ecard"   style="background-image: url(assets/images/dashboard/001.png);">
+<div class="cardleft">
+<p class="phead">Total Sale</p>
+<h2>{{this.totaldaycount}}</h2>
+<!-- <div class="down">
+  <div class="circle" style="background-color: #2C92E5;">
+  <i class="fa fa-arrow-up" id="arrow1" aria-hidden="true" style="font-size: 8px; height: 5px; width: 5px;"></i>
+  </div>
+  <div class="percentage">+3.5%</div>
+  </div> -->
+</div>
+<div class="cardright">
+
+    <img src="assets/images/dashboard/Bitmap.png" alt="img1">
+    <div>
+<button class="report"  [disabled]="userRole !== '0'" [ngClass]="{'disabled-btn': userRole !== '0'}" (click)="exportsaleToExcel()">View Report</button>
+
+    </div>
+    
+</div>
+      </div>
+
+      <div class=" ecard"  style="background-image: url(assets/images/dashboard/002.png);">
+        <div class="cardleft">
+        <p class="phead">Total Bill</p>
+        <h2>{{this.totalbillcount}}</h2>
+        <!-- <div class="down">
+          <div class="circle" style="background-color: #2BD1B9;">
+          <i class="fa fa-arrow-up" id="arrow1" aria-hidden="true" style="font-size: 8px; height: 5px; width: 5px;"></i>
+          </div>
+          <div class="percentage">+15%</div>
+          </div> -->
+        </div>
+        <div class="cardright">
+
+          <img src="assets/images/dashboard/img2.png" alt="img1">
+          <div>
+            <button  [disabled]="userRole !== '0'" [ngClass]="{'disabled-btn': userRole !== '0'}" (click)="exportToExcel()" class="report">View Report</button>
+</div>
+        </div>
+              </div>
+              <div class=" ecard"  style="background-image: url(assets/images/dashboard/003.png);">
+                <div class="cardleft">
+                <p class="phead">Total Service</p>
+                <h2>{{ this.totalservcount}}</h2>
+                <!-- <div class="down">
+                  <div class="circle" style="background-color: #ED7C63;">
+                  <i class="fa fa-arrow-up" id="arrow1" aria-hidden="true" style="font-size: 8px; height: 5px; width: 5px;"></i>
+                  </div>
+                  <div class="percentage">+17%</div>
+                  </div> -->
+                </div>
+                <div class="cardright">
+
+                  <img src="assets/images/dashboard/cart.png" alt="img1">
+                  <div>
+                    <button  class="report" [disabled]="userRole !== '0'" [ngClass]="{'disabled-btn': userRole !== '0'}" (click)="exportToExcels()">View Report</button>
+</div>
+                </div>
+                      </div>
+                      <div class=" ecard"   style="background-image: url(assets/images/dashboard/004.png);">
+                        <div class="cardleft">
+                        <p class="phead">Total Customer</p>
+                        <h2>{{this.totalcutomercount}}</h2>
+                        <!-- <div class="down">
+                          <div class="circle"  style="background-color: #EF79E3;">
+                          <i class="fa fa-arrow-up" id="arrow1" aria-hidden="true" style="font-size: 8px; height: 5px; width: 5px;"></i>
+                          </div>
+                          <div class="percentage">+10%</div>
+                          </div> -->
+                        </div>
+                        <div class="cardright">
+
+                          <img src="assets/images/dashboard/profile.png" alt="img1">
+                          <div>
+                            <button  [disabled]="userRole !== '0'" [ngClass]="{'disabled-btn': userRole !== '0'}" (click)=" exportcustomer()" class="report">View Report</button>
+</div>
+                        </div>
+                              </div>
+
+    </div>
+
+    <div class="charty ">
+      <div class="chartCard">
+
+        <div class="chartBox">
+
+          <div class="summary">Summary</div>
+
+
+
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+      <div class="empimg">
+        <div class="abuttons">
+          <div class="buttons" >
+            <button (click)="switchView('day')" [style.background-color]="currentView === 'day' ? '#FFF067' : ''">Day</button>
+            <button (click)="switchView('month')" [style.background-color]="currentView === 'month' ? '#FFF067' : ''">Month</button>
+            <button (click)="switchView('year')" [style.background-color]="currentView === 'year' ? '#FFF067' : ''">Year</button>
+          </div>
+
+        </div>
+
+        <div class="apara">
+          <div class="arow" style="margin-bottom: 16px;">
+            <img src="assets/images/dashboard/male.png" alt="material-symbols_male">
+            <p class="gender">Number of Male Customers<span style="visibility: hidden;">se</span></p>
+            <p class="gender">{{ data[currentView].male }}</p>
+          </div>
+          <div class="arow">
+            <img src="assets/images/dashboard/female.png" alt="material-symbols_male">
+            <p class="gender">Number of Female Customers</p>
+            <p class="gender">{{ data[currentView].female }}</p>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="tablecont">
+      <div class="tabcontent">
+        <h3>Recent Bills <span style="font-size:13px;">(Last 5 bills)</span> </h3>
+        <p>*PINV - Product Invoice      *SINV -Service Invoice</p>
+      </div>
+      <div class="custotable mt-3" id="tablecontainer" *ngIf="showTable" >
+
+
+        <table id="Record" #Record style="width: 100%;">
+    <thead >
+                      <tr style="width: 100%;">
+                        <th class="cushead">Invoice no</th>
+                        <th class="cushead">Date</th>
+                        <th class="cushead">Customer name</th>
+                        <th class="cushead">Phone no</th>
+                        <th class="cushead">Billing type</th>
+                        <th class="cushead">Total</th>
+                        <th class="cushead" style="text-align: center;">Action</th>
+
+
+
+
+          </tr>
+
+          </thead>
+
+
+
+
+
+    <tbody>
+
+            </tbody>
+            <tbody>
+
+              <tr *ngFor="let service of lastfivedata">
+                <td class="cusbody">{{ service.invoice_no }}</td>
+                <td class="cusbody">{{ datePipe.transform(service.date, 'dd-MM-yyyy') }}</td>
+
+                <td class="cusbody">{{ service.customer_name }}</td>
+                <td class="cusbody">{{ service.customer_phone }}</td>
+                <td class="cusbody">{{ service.invoice_no.startsWith('SINV') ? 'Service' : 'Product' }}</td>
+
+
+                <td class="cusbody">{{service.total}}</td>
+
+                <td class="cusbody">
+                  <div  class="cusicon" >
+                    <a class="icon-link" (click)="viewdetail1(service)" >
+                      <img src="assets/images/dashboard/eye.png" alt="eyeicon">
+
+                      View
+                    </a>
+                    <button class="icon-link" [disabled]="userRole !== '0'" [ngClass]="{'disabled-btn': userRole !== '0'}" (click)="generatePDF1(service)">
+                      <img src="assets/images/dashboard/Vector.png" alt="Vectoricon">
+
+                      Download
+                    </button>
+                  </div>
+                 </td>
+              </tr>
+              <tr *ngFor="let pro of lastwo">
+                <td class="cusbody">{{ pro.invoice_no }}</td>
+                <td class="cusbody">{{ datePipe.transform(pro.date, 'dd-MM-yyyy') }}</td>
+
+                <td class="cusbody">{{ pro.customer_name }}</td>
+                <td class="cusbody">{{ pro. customer_phone }}</td>
+                <td class="cusbody">{{ pro.invoice_no.startsWith('SINV') ? 'Service' : 'Product' }}</td>
+
+
+
+      <td class="cusbody">{{ pro.total }}</td>
+
+                <td class="cusbody">
+                  <div  class="cusicon" >
+                    <a class="icon-link" (click)="viewdetail(pro)">
+                      <img src="assets/images/dashboard/eye.png" alt="eyeicon">
+
+                      View
+                    </a>
+                    <button class="icon-link" [disabled]="userRole !== '0'" [ngClass]="{'disabled-btn': userRole !== '0'}" (click)="generatePDF(pro)">
+                      <img src="assets/images/dashboard/Vector.png" alt="Vectoricon" >
+
+                      Download
+                    </button>
+                  </div>
+                 </td>
+              </tr>
+
+
+              </tbody>
+
+            </table>
+            <div class="allreports">
+          <div class="viewservice" (click)="servereport()"  > View Invoice Summary </div>
+
+            </div>
+            </div>
+    </div>
+
+  </div>
+
+  </div>
+
+  </div>
+
+</div>
+</div>
+  <div  #printContent id="print-space" style="position: absolute; left: -9999px;">
+    <div id="internal-print-space">
+      <div *ngIf="memoriesaddr">
+      <p class="print-main-text">Memories salon</p>
+      <p class="print-common-text">5/353, First Floor, near CTS,</p>
+      <p class="print-common-text">Thoraipakkam, Chennai - 600097</p>
+      <p class="print-common-text">Landmark : Okkiyampet signal</p>
+      <p class="print-common-text">Mob : 098842 68868</p>
+      <p class="print-common-text">GSTIN - 33ALRPJ6077C1Z0</p>
+</div>
+<div *ngIf="marvelmanapakaddr">
+  <p class="print-main-text">Marvel Salon</p>
+  <p class="print-common-text">No 1,First Floor,</p>
+  <p class="print-common-text">Ramachandra Colony</p>
+  <p class="print-common-text">Mugalivakkam Road,</p>
+  <p class="print-common-text">Manapakkam, Chennai-600 125.</p>
+  <p class="print-common-text">Land mark : Opp to Krishna Court </p>
+  <p class="print-common-text">Phone No : 75500 65733</p>
+  <p class="print-common-text">GSTIN - 33AEWPJ1572L1Z1</p>
+</div>
+<div *ngIf="marvelomraddr">
+  <p class="print-main-text">Marvel Salon</p>
+  <p class="print-common-text">3/429,First Floor,</p>
+  <p class="print-common-text">Mettukuppam Bus Stop Thoraipakkam</p>
+  <p class="print-common-text">OMR Food Street, Near by NJK Avenue Old Mahaballipuram Road, SH 49A,</p>
+  <p class="print-common-text"> Chennai, Tamil Nadu 600097</p>
+</div>
+<div *ngIf="marvelannanagar">
+  <p class="print-main-text">Marvel Salon</p>
+  <p class="print-common-text">1, Krishna Flats, 13th St, </p>
+  <p class="print-common-text">Z Block, G Block, Annanagar East</p>
+  <p class="print-common-text">Chennai, Tamil Nadu 600040</p>
+  <p class="print-common-text">Phone No : 73056 37101</p>
+</div>
+<div *ngIf="rainbowmedia">
+  <p class="print-main-text">Raibow Media</p>
+  <p class="print-common-text">Old.No. 83, New no.112, </p>
+  <p class="print-common-text">2nd floor, Anna salai, Manickam lane</p>
+  <p class="print-common-text">Guindy, Chennai-600032</p>
+  <p class="print-common-text">Phone No : 7305821333</p>
+</div>
+
+      <div class="print-data-section">
+        <p class="print-common-text">Bill No&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;<span id="invNoSpan"></span></p>
+        <p class="print-common-text">Date &nbsp;&emsp;:&emsp;<span id="dtSpan"></span></p>
+        <p class="print-common-text">Customer&emsp;&emsp;&nbsp;&nbsp;:&emsp;<span id="custSpan"></span></p>
+        <p class="print-common-text">Mobile No&emsp;&emsp;:&emsp;<span id="mobSpan"></span></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Category</th>
+              <th>Qty</th>
+              <th>Rate</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+
+          </tbody>
+        </table>
+
+        <div class="calc">
+          <p class="print-common-text tga">Total Gross Amount</p><span id="colon">:</span><span id="grossSpan"></span></div>
+
+          <div class="calc"><p class="print-common-text tga">GST (<span id="gstrate1"></span>%) </p><span id="colon">:</span><span id="gstSpan"></span></div>
+
+          <div class="calc" style="margin: 10px 0;"><p class="print-common-text na">Net Amount</p><span id="colon">:</span><span id="netSpan"></span></div>
+      </div>
+      <div class="print-meta-data">
+        <div>
+          <p class="print-common-text">Cash&emsp;:&emsp;<span id="cashSpan1"></span></p>
+          <p class="print-common-text">UPI&emsp;:&emsp;<span id="upiSpan1"></span></p>
+        </div>
+        <p class="print-common-text">Pay Mode&emsp;:&emsp;<span id="paySpan"></span></p>
+        <p class="print-common-text" id="thank">Thank You</p>
+      </div>
+    </div>
+  </div>
+  <div  #printContent1 id="print-space" style="position: absolute; left: -9809px;">
+    <div id="internal-print-space">
+      <div *ngIf="memoriesaddr">
+        <p class="print-main-text">Memories salon</p>
+        <p class="print-common-text">5/353, First Floor, near CTS,</p>
+        <p class="print-common-text">Thoraipakkam, Chennai - 600097</p>
+        <p class="print-common-text">Landmark : Okkiyampet signal</p>
+        <p class="print-common-text">Mob : 098842 68868</p>
+        <p class="print-common-text">GSTIN - 33ALRPJ6077C1Z0</p>
+  </div>
+  <div *ngIf="marvelmanapakaddr">
+    <p class="print-main-text">Marvel Salon</p>
+    <p class="print-common-text">No 1,First Floor,</p>
+    <p class="print-common-text">Ramachandra Colony</p>
+    <p class="print-common-text">Mugalivakkam Road,</p>
+    <p class="print-common-text">Manapakkam, Chennai-600 125.</p>
+    <p class="print-common-text">Land mark : Opp to Krishna Court </p>
+    <p class="print-common-text">Phone No : 75500 65733</p>
+      <p class="print-common-text">GSTIN - 33AEWPJ1572L1Z1</p>
+  </div>
+  <div *ngIf="marvelomraddr">
+    <p class="print-main-text">Marvel Salon</p>
+    <p class="print-common-text">3/429,First Floor,</p>
+    <p class="print-common-text">Mettukuppam Bus Stop Thoraipakkam</p>
+    <p class="print-common-text">OMR Food Street, Near by NJK Avenue Old Mahaballipuram Road, SH 49A,</p>
+    <p class="print-common-text"> Chennai, Tamil Nadu 600097</p>
+  </div>
+  <div *ngIf="marvelselaiyur">
+  
+    <p class="print-main-text">Marvel Salon</p>
+    <p class="print-common-text">No-19, MC Builders,First Floor, </p>
+    <p class="print-common-text">Shirdi Sai Nagar,Thiruvanchery,</p>
+    <p class="print-common-text"> Selaiyur, Chennai-600073</p>
+    <p class="print-common-text">Phone No:7305699399</p>
+  </div>
+      <div class="print-data-section">
+        <p class="print-common-text">Bill No&emsp;&emsp;&emsp;&nbsp;&nbsp;:&emsp;<span id="invNoSpan1"></span></p>
+        <p class="print-common-text">Date&nbsp;&emsp;:&emsp;<span id="dtSpan1"></span></p>
+        <p class="print-common-text">Customer&emsp;&emsp;&nbsp;&nbsp;:&emsp;<span id="custSpan1"></span></p>
+        <p class="print-common-text">Mobile No&emsp;&emsp;:&emsp;<span id="mobSpan1"></span></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Service Name</th>
+              <th>Staff Name</th>
+              <th>Qty</th>
+              <th>Rate</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="tbody1">
+
+          </tbody>
+        </table>
+
+        <div class="calc">
+          <p class="print-common-text tga">Total Gross Amount</p><span id="colon">:</span><span id="grossSpan1"></span></div>
+
+          <div class="calc"><p class="print-common-text tga">GST (<span id="gstrate4"></span>%) </p><span id="colon">:</span><span id="gstSpan1"></span></div>
+
+          <div class="calc" style="margin: 10px 0;"><p class="print-common-text na">Net Amount</p><span id="colon">:</span><span id="netSpan1"></span></div>
+      </div>
+      <div class="print-meta-data">
+        <div>
+          <p class="print-common-text">Cash&emsp;:&emsp;<span id="cashSpan"></span></p>
+          <p class="print-common-text">UPI&emsp;:&emsp;<span id="upiSpan"></span></p>
+        </div>
+        <p class="print-common-text">Pay Mode&emsp;:&emsp;<span id="paySpan1"></span></p>
+        <p class="print-common-text" id="thank">Thank You</p>
+      </div>
+    </div>
+  </div>
+

@@ -1,0 +1,84 @@
+<div class="staffpopup">
+  <div class="popr1">
+  <div class="addcustomage">
+  <div class="circular-image-container">
+
+    <img *ngIf="selectedFile" [src]="selectedFileUrl" alt="Circular Image" class="circular-image">
+  </div>
+  <div class="addimg">
+   <div class="imgicon">
+  <img src="assets/images/Vector (2).png" class="upimg" alt="">
+  </div>
+  <div class="addphoto">
+  <label for="imgupload" class="mt-1 ms-2">image</label>
+  </div>
+  </div>
+  <input type="file" id="imgupload" style="margin-left: 100px;" (change)="onFileSelected($event)" accept="image/*">
+  </div>
+  <div class="staffname mt-2"><label class="label1 mb-2">Full Name</label><span  style="color:red;">*</span><br><input type="text" [(ngModel)]="name" name=""  style="text-transform: capitalize;" id="" class="inp"></div>
+  <div class="small mt-2">
+  <div><label class="label1 mb-2">Initial</label><span  style="color:red;">*</span><br><input type="text" [(ngModel)]="initial" name="" id="" style="text-transform: uppercase;" class="inp1"></div>
+  <div><label class="label1 mb-2">Gender</label><span  style="color:red;">*</span><br><select name="" id="" class="inp1" [(ngModel)]="gender" (change)="select1($event)">
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select></div>
+  </div>
+  </div>
+  <div class="popr2 mt-3">
+    <div class="mt-2"><label class="label1 mb-2">Date of Joining</label><span  style="color:red;">*</span><br><input type="date" [(ngModel)]="date_of_joining"  [max]="getMinimumDate()" name="" id="" class="inp"></div>
+    <div class="mt-2"><label class="label1 mb-2">Designation</label><span  style="color:red;">*</span><br><select name="" id="" [(ngModel)]="designation" class="inp" (change)="select2($event)">
+      <option value="Hair dresser">Hair dresser </option>
+      <option value="Stylist">Stylist</option>
+      <option value="Unisex stylist">Unisex stylist</option>
+      <option value="Hair and beauty">Hair and beauty</option>
+      <option value="Beautician">Beautician</option>
+      <option value="Bridal Artist">Bridal Artist</option>
+      <option value="Salon Manager">Salon Manager</option>
+      <option value="Senior Hair dresser">Senior Hair dresser</option>
+      <option value="Nail technician">Nail technician</option>
+      <option value="Waxing specialist">Waxing specialist</option>
+    </select></div>
+    <div class="mt-2"><label class="label1 mb-2">Email ID</label><br><input type="text" name="" id="" [(ngModel)]="email" class="inp" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required #emailInput="ngModel">
+      <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="validation-warning">
+        Please enter a valid email address.
+      </div></div>
+    </div>
+    <div class="popr2 mt-4">
+      <div class="mt-2"><label class="label1 mb-2">Employee ID</label><br><input type="text" [(ngModel)]="employee_id" name="" id="" value="{{this.getempids}}" class="inp" readonly></div>
+      <div class="mt-2"><label class="label1 mb-2">Blood Group</label><span  style="color:red;">*</span><br><select name="" id="" class="inp" [(ngModel)]="blood_group" (change)="select($event)">
+        <option value="A +ve">A +ve</option>
+        <option value="B +ve">B +ve</option>
+        <option value="O +ve">O +ve</option>
+        <option value="O -ve">O -ve</option>
+        <option value="A -ve">A -ve</option>
+        <option value="B -ve">B -ve</option>
+        <option value="AB +ve">AB +ve</option>
+        <option value="AB -ve">AB -ve</option>
+      </select></div>
+      <div class="mt-2"><label class="label1 mb-2">Phone No</label><span  style="color:red;">*</span><br><input type="text" name="" pattern="[0-9]{10}" maxlength="10" [(ngModel)]="phone" id="" class="inp"></div>
+      </div>
+      <div class="popr2 mt-4">
+        <div class="mt-2"><label class="label1 mb-2">Location</label><br><input type="text" name="" [(ngModel)]="address" id="" class="inp"></div>
+        <div class="mt-2"><label class="label1 mb-2">Emergency Contact</label><span  style="color:red;">*</span><br><input type="text" pattern="[0-9]{10}" maxlength="10" name="" [(ngModel)]="emergency_contact" id="" class="inp"></div>
+        <div class="mt-2"><label class="label1 mb-2">ID Proof</label><span  style="color:red;">*</span><br><select name="" id="" class="inp" [(ngModel)]="idproof"  (change)="select3($event)">
+          <option value="Aadhar">Aadhar</option>
+          <option value="PAN">PAN</option>
+          <option value="Voter">Voter</option>
+          <option value="Ration">Ration</option>
+
+        </select></div>
+
+        </div>
+        <div class="popr2 mt-4">
+          <div class="mt-2"><label class="label1 mb-2">ID Proof No</label><span  style="color:red;">*</span><br><input type="text" name="" [(ngModel)]="idproofno" id="" class="inp"></div>
+
+          <div class="buttons">
+            <div>
+            <button class="save" (click)="addstaff()">Save</button></div>
+           <div> <button class="cancel" (click)="cancelUpdate()">Cancel</button></div>
+          </div>
+
+          </div>
+
+  </div>
+
