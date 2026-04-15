@@ -154,8 +154,9 @@ this.role=decodetoken.role;
   }
 
   getinvlist() {
-    this.data.getreports().subscribe((result: any) => {
-      this.originalDataList = result.sortedArray;
+  this.data.getreports().subscribe((result: any) => {
+    this.originalDataList = result?.sortedArray || [];
+
 
 
       this.applyFilters();
