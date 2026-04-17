@@ -154,18 +154,21 @@ this.role=decodetoken.role;
   }
 
   getinvlist() {
-  this.data.getreports().subscribe((result: any) => {
-    this.originalDataList = result?.sortedArray || [];
+    const pageno = 1;
+  this.data.getreportsPage(pageno).subscribe((result: any) => {
+    this.originalDataList = result?.data || [];
+
+console.log("this.originalDataList",this.originalDataList);
 
 
-
-      this.applyFilters();
       this.totalsum = 0;
       this.totalsum1 = 0;
       this.totalsum2 = 0;
       this.totalsum3 = 0;
       this.totalcount = 0;
       this.count=0
+      
+      this.applyFilters();
     });
   }
 
