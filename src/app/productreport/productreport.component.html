@@ -49,24 +49,29 @@
 <div class="reportdetails">
   <div class="reportinputs">
 
-    <div><label class="label1 mb-2">From </label><br><input type="date" [(ngModel)]="from" (ngModelChange)="list()" name="" id="" class="repinp1"></div>
-    <div><label class="label1 mb-2">To </label><br><input type="date" name="" id=""  [(ngModel)]="to" (ngModelChange)="list()"  class="repinp1"></div>
+    <div><label class="label1 mb-2">From </label><br><input type="date" [(ngModel)]="from" (ngModelChange)="getinvlist(1)" name="" id="" class="repinp1"></div>
+    <div><label class="label1 mb-2">To </label><br><input type="date" name="" id=""  [(ngModel)]="to" (ngModelChange)="getinvlist(1)"  class="repinp1"></div>
     <!-- <div><label class="label1 mb-2">Billing Type</label><br><input type="text" name="" id="" class="repinp1"></div> -->
-    <div><label class="label1 mb-2">Invoice No</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="inv" (ngModelChange)="list()"></div>
-    <div><label class="label1 mb-2">Invoice Type</label><br><select name="" [(ngModel)]="selectedInvoiceType" class="repinp1"  (ngModelChange)="list()" id="">
+    <div><label class="label1 mb-2">Invoice No</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="inv" (ngModelChange)="getinvlist(1)"></div>
+    <div><label class="label1 mb-2">Invoice Type</label><br><select name="" [(ngModel)]="selectedInvoiceType" class="repinp1"  (ngModelChange)="getinvlist(1)" id="">
       <option value="">All</option>
       <option value="Service">Service</option>
       <option value="Product">Product</option>
     </select></div>
-    <!-- <div><label class="label1 mb-2">Staff Name</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="staffname" (ngModelChange)="list()"></div> -->
+    <!-- <div><label class="label1 mb-2">Staff Name</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="staffname" (ngModelChange)="getinvlist(1)"></div> -->
   </div>
   <div class="reportinputs1 mb-2">
-    <div><label class="label1 mb-2">Membership No</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="membership_no" (ngModelChange)="list()"></div>
-    <!-- <div><label class="label1 mb-2">Item Name</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="itemName" (ngModelChange)="list()"></div> -->
-    <!-- <div><label class="label1 mb-2">Product Name</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="productname" (ngModelChange)="list()"></div> -->
-    <div><label class="label1 mb-2">Customer Name</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="customername" (ngModelChange)="list()"></div>
-    <div><label class="label1 mb-2">Phone No</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="phoneNo" (ngModelChange)="list()"></div>
-    <div><label class="label1 mb-2">Transaction Type</label><br><select name="" id="" class="repinp1" [(ngModel)]="selectpaymode" (change)="pay($event)" (ngModelChange)="list()">
+       <div><label class="label1 mb-2">Gender</label><br><select name="" [(ngModel)]="gender" class="repinp1"  (ngModelChange)="getinvlist(1)" id="">
+      <option value="">All</option>
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+    </select></div>
+    <!-- <div><label class="label1 mb-2">Membership No</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="membership_no" (ngModelChange)="getinvlist(1)"></div> -->
+    <!-- <div><label class="label1 mb-2">Item Name</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="itemName" (ngModelChange)="getinvlist(1)"></div> -->
+    <!-- <div><label class="label1 mb-2">Product Name</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="productname" (ngModelChange)="getinvlist(1)"></div> -->
+    <div><label class="label1 mb-2">Customer Name</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="customername" (ngModelChange)="getinvlist(1)"></div>
+    <div><label class="label1 mb-2">Phone No</label><br><input type="text" name="" id="" class="repinp1" [(ngModel)]="phoneNo" (ngModelChange)="getinvlist(1)"></div>
+    <div><label class="label1 mb-2">Transaction Type</label><br><select name="" id="" class="repinp1" [(ngModel)]="selectpaymode" (change)="pay($event)" (ngModelChange)="getinvlist(1)">
       <option value="">All</option>
       <option value="Card">Card</option>
       <option value="Cash">Cash</option>
@@ -88,7 +93,11 @@
 <div *ngIf="this.role==0" class="role">
 
 <div class="custotable mt-3" >
+    <div *ngIf="isLoading" class="loader-container">
+  <div class="spinner"></div>
+</div>
   <!-- <div class="scroll"> -->
+    <div *ngIf="!isLoading">
     <table id="Record1" #Record >
 
     <thead style="
@@ -117,10 +126,14 @@
       </thead>
 
 
+
+
     <tbody>
+
+
 <ng-container *ngFor="let inv of datalist; let i=index">
   <tr style="border-radius: 20px; height: 50.775px; border: 1px solid #EEE; background-color: #FFF;">
-    <td class="cusbody">{{i+1}}</td>
+    <td class="cusbody">{{ (currentPager - 1) * pageSizer + i + 1 }}</td>
         <td class="cusbody">{{inv.invoice_no}}</td>
 
         <td class="cusbody">{{ datePipe.transform(inv.date, 'dd-MM-yyyy') }}</td>
@@ -183,6 +196,7 @@
       </ng-container>
       </ng-container> -->
           </ng-container>
+         
     </tbody>
 
     <!-- <tbody>
@@ -196,6 +210,39 @@
       </tr>
     </tbody> -->
     </table>
+      <div class="pagination" *ngIf="totalPager > 1">
+
+  <button (click)="getinvlist(1)" [disabled]="currentPager === 1">«</button>
+
+  <button (click)="getinvlist(currentPager - 1)" [disabled]="currentPager === 1">
+    ‹
+  </button>
+
+  <ng-container *ngFor="let page of visiblePager">
+
+    <!-- Dots -->
+    <span *ngIf="page === -1">...</span>
+
+    <!-- Page Numbers -->
+    <span *ngIf="page !== -1"
+          (click)="getinvlist(page)"
+          [class.active]="currentPager === page">
+      {{ page }}
+    </span>
+
+  </ng-container>
+
+  <button (click)="getinvlist(currentPager + 1)" [disabled]="currentPager === totalPager">
+    ›
+  </button>
+
+  <button (click)="getinvlist(totalPager)" [disabled]="currentPager === totalPager">
+    »
+  </button>
+
+</div>
+     </div>
+    
     <div class="showcount">
       <div class="rowcount1">
         <label for="">Count :</label><input type="text" class="countbox" value="{{this.count}}" readonly>
@@ -208,6 +255,7 @@
        </div>
       </div>
     </div>
+   
     <!-- <div class="rowcount">
       <label for="">Count :</label><input type="text" class="countbox" value="{{this.count}}" readonly>
       <label for="">Cash & UPI :</label><input type="text" class="countbox" value="{{totalsum3}}" readonly>
@@ -231,6 +279,10 @@
 <div *ngIf="this.role==1" class="role">
   <div class="custotable mt-3">
     <!-- <div class="scroll"> -->
+         <div *ngIf="isLoading" class="loader-container">
+  <div class="spinner"></div>
+</div>
+<div *ngIf="!isLoading">
       <table id="Record" #Record>
 
         <thead style="
@@ -259,9 +311,10 @@
 
 
         <tbody>
+       
     <ng-container *ngFor="let inv of datalist; let i=index">
       <tr style="border-radius: 20px; height: 50.775px; border: 1px solid #EEE; background-color: #FFF;">
-        <td class="cusbody">{{i+1}}</td>
+        <td class="cusbody">{{ (currentPager - 1) * pageSizer + i + 1 }}</td>
             <td class="cusbody">{{inv.invoice_no}}</td>
 
             <td class="cusbody">{{ datePipe.transform(inv.date, 'dd-MM-yyyy') }}</td>
@@ -284,10 +337,44 @@
         </tr>
 
               </ng-container>
+      
         </tbody>
 
 
         </table>
+         <div class="pagination" *ngIf="totalPager > 1">
+
+  <button (click)="getinvlist(1)" [disabled]="currentPager === 1">«</button>
+
+  <button (click)="getinvlist(currentPager - 1)" [disabled]="currentPager === 1">
+    ‹
+  </button>
+
+  <ng-container *ngFor="let page of visiblePager">
+
+    <!-- Dots -->
+    <span *ngIf="page === -1">...</span>
+
+    <!-- Page Numbers -->
+    <span *ngIf="page !== -1"
+          (click)="getinvlist(page)"
+          [class.active]="currentPager === page">
+      {{ page }}
+    </span>
+
+  </ng-container>
+
+  <button (click)="getinvlist(currentPager + 1)" [disabled]="currentPager === totalPager">
+    ›
+  </button>
+
+  <button (click)="getinvlist(totalPager)" [disabled]="currentPager === totalPager">
+    »
+  </button>
+
+</div>
+        </div>
+   
         <div class="showcount">
           <div class="rowcount2">
             <label for="">Count :</label><input type="text" class="countbox" value="{{this.count}}" readonly>

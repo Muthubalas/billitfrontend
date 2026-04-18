@@ -456,12 +456,23 @@ addcustomer(data:any):Observable<User>{
     return this.http.get('https://localhost:7118/Invoice/generatepdf?InvoiceNo='+invoiceno,{observe:'response',responseType:'blob'});
 
   }
-  getreportsPage(pageno: number):Observable<User>{
-    return this.http.get(`${this.endpoint}/total-report?page=${pageno}`)
+  getreports():Observable<User>{
+    return this.http.get(this.endpoint+"/total-report")
   }
-    getreports():Observable<User>{
-    return this.http.get(`${this.endpoint}/total-report`)
-  }
+  // getreportsPage(pageno: number):Observable<User>{
+  //    return this.http.get(`${this.endpoint}/total-report?page=${pageno}`)
+  // }
+  getreportsPage(params: any): Observable<any> {
+  let query = new URLSearchParams();
+
+  Object.keys(params).forEach(key => {
+    if (params[key]) {
+      query.append(key, params[key]);
+    }
+  });
+
+  return this.http.get(`${this.endpoint}/total-report?${query.toString()}`);
+}
   daywisereports():Observable<User>{
     return this.http.get(this.endpoint+"/daywise-report")
   }
