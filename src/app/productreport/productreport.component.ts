@@ -525,8 +525,7 @@ this.procato=this.pro[i].Product_category;
   @ViewChild('Record') Record!: ElementRef;
   export() {
   const params: any = {
-    page: 1,
-    limit: 100000 
+     all: true
   };
 
   

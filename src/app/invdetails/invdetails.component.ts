@@ -40,17 +40,21 @@ export class InvdetailsComponent implements OnInit {
   formattedTime: any;
   proname: any;
   table: any;
+   pageSizer:number=20;
   invoice: any;
   gst: any;
   roundgst: any;
   datey: any;
+   isLoading: boolean = false;
   a: any;
   quantity: any;
   pname: any;
   prate: any;
   pqua: any;
+    membership_no: any;
   pamount: any;
   dis: any;
+   gender:any;
   noDataAvailable: any;
   pdfUrl: any;
   totalcount: any;
@@ -84,6 +88,9 @@ export class InvdetailsComponent implements OnInit {
   helper = new JwtHelperService();
   profile: any;
   role: any;
+  currentPager: number = 1;
+totalPager: number = 1;
+ visiblePager: number[] = [];
   productname: any;
   selectedStaff: any;
   getstafflist: any[] = [];
@@ -111,8 +118,8 @@ export class InvdetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getstaff();
-    this.getinvlist();
-    this.list();
+    this.getinvlist(1);
+   
     this.token = localStorage.getItem('token');
     let decodetoken = this.helper.decodeToken(this.token);
     this.role = decodetoken.role;
@@ -163,392 +170,86 @@ export class InvdetailsComponent implements OnInit {
     const pdf = doc.output('blob');
     FileSaver.saveAs(pdf, 'output.pdf');
   }
-  getinvlist() {
-    this.data.getreports().subscribe((result: any) => {
-      this.originalDataList = result.sortedArray;
+  getinvlist(pageno: number = 1) {
+  this.isLoading = true;
 
-      this.applyFilters();
-      this.totalsum = 0;
-      this.totalsum1 = 0;
-      this.totalsum2 = 0;
-      this.totalsum3 = 0;
-      this.totalAmount = 0;
-      this.count = 0;
-    });
+  const params: any = {
+   page: pageno,
+    limit: 20
+  };
+
+  if (this.from && this.to) {
+    params.startDate = this.from;
+    params.endDate = this.to;
   }
-  list() {
-    this.applyFilters();
-  }
-  filteredData: any[] = [];
 
-  applyFilters() {
-    this.datalist = this.originalDataList.filter((item) => {
-      const trimmedProductName = this.itemName ? this.itemName.trim() : '';
-      const trimmedStaffName = this.staffname ? this.staffname.trim() : '';
-      const trimmedCustomerName = this.customername
-        ? this.customername.trim()
-        : '';
-      const trimmedPhoneNo = this.phoneNo ? this.phoneNo.trim() : '';
-      const trimmedInvoiceNo = this.inv ? this.inv.trim() : '';
-      this.itemName = this.itemName ? this.itemName.trim() : '';
-      this.customername = this.customername ? this.customername.trim() : '';
-      this.phoneNo = this.phoneNo ? this.phoneNo.trim() : '';
-      this.inv = this.inv ? this.inv.trim() : '';
-      const trimmedSelectedInvoiceType = this.selectedInvoiceType
-        ? this.selectedInvoiceType.trim()
-        : '';
-      const dateCondition = item.date;
-      // const dateCondition = new Date(item.createdAt).toISOString().split('T')[0];
-      const from = this.from;
-      const to = this.to;
-      const prodname =
-        !this.productname ||
-        (item.product_details &&
-          item.product_details.some(
-            (product: any) =>
-              product.Product_name &&
-              product.Product_name.toLowerCase().startsWith(
-                this.productname.toLowerCase()
-              )
-          ));
-      const servname =
-        !this.servname ||
-        (item.service_details &&
-          item.service_details.some(
-            (product: any) =>
-              product.service_name &&
-              product.service_name
-                .toLowerCase()
-                .startsWith(this.servname.toLowerCase())
-          ));
-      const itemName =
-        !this.itemName ||
-        (item.product_details &&
-          item.product_details.some(
-            (product: any) =>
-              product.Product_name &&
-              product.Product_name.toLowerCase().startsWith(
-                this.itemName.toLowerCase()
-              )
-          )) ||
-        (item.service_details &&
-          item.service_details.some(
-            (detail: any) =>
-              detail.service_name &&
-              detail.service_name
-                .toLowerCase()
-                .startsWith(this.itemName.toLowerCase())
-          ));
-const empty="";
-      const invoiceCondition =
-        !this.inv ||
-        item.invoice_no.toLowerCase().startsWith(this.inv.toLowerCase());
-      const paymode =
-        !this.selectpaymode ||
-        (item.payment_mode &&
-          item.payment_mode
-            .toLowerCase()
-            .includes(this.selectpaymode.toLowerCase()));
-      const customer =
-        !this.customername ||
-        item.customer_name
-          .toLowerCase()
-          .startsWith(this.customername.toLowerCase());
-      const custonum =
-        !this.phoneNo ||
-        item.customer_phone
-          .toLowerCase()
-          .startsWith(this.phoneNo.toLowerCase());
-      const staffCondition =
-        !this.staffname ||
-        (item.product_details &&
-          item.product_details.some(
-            (product: any) =>
-              product.staffname &&
-              product.staffname.toLowerCase() === this.staffname.toLowerCase()
-          )) ||
-        (item.service_details &&
-          item.service_details.some(
-            (detail: any) =>
-              detail.staffname &&
-              detail.staffname.toLowerCase() === this.staffname.toLowerCase()
-          ));
+  if (this.inv) params.invoice_no = this.inv;
+  if (this.customername) params.customer_name = this.customername;
+  if (this.phoneNo) params.customer_phone = this.phoneNo;
+  if (this.membership_no) params.membership_no = this.membership_no;
+  if (this.selectpaymode) params.payment_mode = this.selectpaymode;
+  if (this.selectedInvoiceType) params.invoiceType = this.selectedInvoiceType;
+ if (this.gender) params.gender = this.gender;
+ if (this.staffname) params.staffname = this.staffname;
+  this.data.getreportsPage(params).subscribe({
+    next: (result: any) => {
+      this.datalist = result.data || [];
+      this.totalPager = result.totalPages;
+      this.currentPager = result.currentPage;
+this.totalsum2 = result.summary.upi;
+this.totalsum = result.summary.cash;
+this.totalsum1 = result.summary.card;
+this.totalcount = result.summary.total;
+this.count = result.summary.count;
+      this.updateVisiblePages();
+    
 
-      if (this.selectedInvoiceType) {
-        const isService = this.selectedInvoiceType === 'Service';
-        const isProduct = this.selectedInvoiceType === 'Product';
-
-        const invoiceTypeCondition = isService
-          ? item.invoice_no.toLowerCase().startsWith('sinv')
-          : isProduct && item.invoice_no.toLowerCase().startsWith('pinv');
-        return (
-          (!from || dateCondition >= from) &&
-          (!to || dateCondition <= to) &&
-          invoiceCondition &&
-          staffCondition &&
-          customer &&
-          custonum &&
-          paymode &&
-          prodname &&
-          servname &&
-          itemName &&
-          invoiceTypeCondition
-        );
-      } else {
-        return (
-          (!from || dateCondition >= from) &&
-          (!to || dateCondition <= to) &&
-          invoiceCondition &&
-          staffCondition &&
-          customer &&
-          custonum &&
-          paymode &&
-          prodname &&
-          servname &&
-          itemName
-        );
-      }
-    });
-    this.calculateTotalAmount();
-    this.currentPage = 1;
-  }
-  calculateTotalAmount() {
-    let totalSum = 0;
-    let totalSum1 = 0;
-    let totalSum2 = 0;
-    let totalSum3 = 0;
-    let totalAmount1 = 0;
-    let totalAmount2 = 0;
-    let totalcount = 0;
-    let serialNumber = 1;
-    let serviceCount = 0;
-
-    this.totalsum = 0;
-    this.totalsum1 = 0;
-    this.totalsum2 = 0;
-    this.totalsum3 = 0;
-    this.totalcount = 0;
-
-    for (const entry of this.datalist) {
-      this.gstrate = Math.round((entry.gst / entry.sub_total) * 100);
-      if (entry.service_details && entry.service_details.length > 0) {
-        for (const service of entry.service_details) {
-          
-          if (
-            (!this.staffname ||
-              service.staffname?.toLowerCase() ===
-                this.staffname.toLowerCase()) &&
-            (!this.itemName ||
-              service.service_name
-                ?.toLowerCase()
-                .startsWith(this.itemName.toLowerCase()))
-          ) {
-            const serviceAmountWithGST =
-              parseFloat(service.amount) +
-              (parseFloat(service.amount) * this.gstrate) / 100;
-
-            this.tot = serviceAmountWithGST;
-
-            // if (entry.payment_mode === "Cash") {
-            //   totalSum += parseFloat(this.tot);
-            //   this.totalsum = totalSum;
-            // } else if (entry.payment_mode === "Card") {
-            //   totalSum1 += parseFloat(this.tot);
-            //   this.totalsum1 = totalSum1;
-            // } else if (entry.payment_mode === "UPI") {
-            //   totalSum2 += parseFloat(this.tot);
-            //   this.totalsum2 = totalSum2;
-            // } else if (entry.payment_mode === "cash and upi") {
-            //   totalSum3 += parseFloat(this.tot);
-            //   this.totalsum3 = totalSum3;
-            // }
-          }
-        }
-      }
-      if (entry.product_details && entry.product_details.length > 0) {
-        for (const product of entry.product_details) {
-          if (
-            (!this.staffname ||
-              product.staffname?.toLowerCase() ===
-                this.staffname.toLowerCase()) &&
-            (!this.itemName ||
-              product.service_name
-                ?.toLowerCase()
-                .startsWith(this.itemName.toLowerCase()))
-          ) {
-            const serviceAmountWithGST1 =
-              parseFloat(product.amount) +
-              (parseFloat(product.amount) * this.gstrate) / 100;
-
-            this.totpro = serviceAmountWithGST1;
-
-            // if (entry.payment_mode === "Cash") {
-            //   totalSum += parseFloat(this.totpro);
-            //   this.totalsum = totalSum;
-            // } else if (entry.payment_mode === "Card") {
-            //   totalSum1 += parseFloat(this.totpro);
-            //   this.totalsum1 = totalSum1;
-            // } else if (entry.payment_mode === "UPI") {
-            //   totalSum2 += parseFloat(this.totpro);
-            //   this.totalsum2 = totalSum2;
-            // } else if (entry.payment_mode === "cash and upi") {
-            //   totalSum3 += parseFloat(this.totpro);
-            //   this.totalsum3 = totalSum3;
-            // }
-          }
-        }
-      }
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error(err);
+      this.isLoading = false;
     }
-
-    if (this.datalist.length === 0 || this.selectpaymode === '') {
-      this.totalsum = 0;
-      this.totalsum1 = 0;
-      this.totalsum2 = 0;
-      this.totalsum3 = 0;
-      this.count = 0;
-      this.totalAmount = 0;
-    } else {
-      for (const entry of this.datalist) {
-        this.gstrate = Math.round((entry.gst / entry.sub_total) * 100);
-        if (this.selectpaymode === entry.payment_mode) {
-          if (entry.service_details && entry.service_details.length > 0) {
-            for (const service of entry.service_details) {
-              const serviceAmountWithGST =
-                parseFloat(service.amount) +
-                (parseFloat(service.amount) * this.gstrate) / 100;
-
-              this.tot = serviceAmountWithGST;
-              switch (this.selectpaymode) {
-                case 'Cash':
-                  totalSum += parseFloat(this.tot);
-                  this.totalsum = totalSum.toFixed(2);
-                  break;
-                case 'Card':
-                  totalSum1 += parseFloat(this.tot);
-                  this.totalsum1 = totalSum1.toFixed(2);
-                  break;
-                case 'UPI':
-                  totalSum2 += parseFloat(this.tot);
-                  this.totalsum2 = totalSum2.toFixed(2);
-                  break;
-                case 'cash and upi':
-                  if(entry.invoice_no == this.invoice_no){
-                    if (!isNaN(parseFloat(entry.cash_amount))) {
-                      totalSum += parseFloat(entry.cash_amount);
-                    }
+  });
+}
   
-                    this.totalsum = totalSum.toFixed(2);
-                    if (!isNaN(parseFloat(entry.UPI_amount))) {
-                      totalSum2 += parseFloat(entry.UPI_amount);
-                    }
-                    this.totalsum2 = totalSum2.toFixed(2);
-                  }
-            
-                  // totalSum3 += parseFloat(this.tot);
-                  // this.totalsum3 = totalSum3;
-                  break;
-              }
-            }
-          }
-        }
+updateVisiblePages() {
+  const pages = [];
+
+  if (this.totalPager <= 5) {
+    // small pages → show all
+    for (let i = 1; i <= this.totalPager; i++) {
+      pages.push(i);
+    }
+  } else {
+    // always show first page
+    pages.push(1);
+
+    // show "..." before
+    if (this.currentPage > 3) {
+      pages.push(-1); // -1 = dots
+    }
+
+    // middle pages
+    for (let i = this.currentPage - 1; i <= this.currentPage + 1; i++) {
+      if (i > 1 && i < this.totalPager) {
+        pages.push(i);
       }
-
-    
-      for (const entry of this.datalist) {
-        this.gstrate = Math.round((entry.gst / entry.sub_total) * 100);
-        let hasProcessedCashAndUpi = false;
-        // Process service details
-        if (entry.service_details && entry.service_details.length > 0) {
-            for (const service of entry.service_details) {
-                if (
-                    (!this.staffname || service.staffname?.toLowerCase() === this.staffname.toLowerCase()) &&
-                    (!this.itemName || service.service_name?.toLowerCase().startsWith(this.itemName.toLowerCase()))
-                ) {
-                    service.serialNumber = serialNumber;
-                    const serviceAmountWithGST = parseFloat(service.amount) + (parseFloat(service.amount) * this.gstrate) / 100;
-                    this.totpro = serviceAmountWithGST;
-                    service.serviceAmountWithGST = serviceAmountWithGST;
-                    totalAmount1 += serviceAmountWithGST;
-                    service.gstrate = this.gstrate;
-                    this.serviceAmountWithGST = totalAmount1;
-    
-                    if (entry.payment_mode === 'Cash') {
-                        totalSum += serviceAmountWithGST;
-                        console.log(`Cash ${totalSum}`);
-                    } else if (entry.payment_mode === 'Card') {
-                        totalSum1 += serviceAmountWithGST;
-                    } else if (entry.payment_mode === 'UPI') {
-                        totalSum2 += serviceAmountWithGST;
-                    } else if (entry.payment_mode === 'cash and upi' && !hasProcessedCashAndUpi) {
-                      hasProcessedCashAndUpi = true;
-                        if (!isNaN(parseFloat(entry.cash_amount))) {
-                          console.log(`Initial totalSum: ${totalSum}, totalSum2: ${totalSum2}`);
-                            totalSum += parseFloat(entry.cash_amount);
-                            console.log(`CU-----cash ${totalSum}`);
-                        }
-                        if (!isNaN(parseFloat(entry.UPI_amount))) {
-                            totalSum2 += parseFloat(entry.UPI_amount);
-                            console.log(`CU-----UPI ${totalSum2}`);
-                        }
-                    }
-                    serialNumber++;
-                    serviceCount++;
-                }
-            }
-        }
-    
-        // Process product details
-        if (entry.product_details && entry.product_details.length > 0) {
-            for (const product of entry.product_details) {
-                if (
-                    (!this.staffname || product.staffname?.toLowerCase() === this.staffname.toLowerCase()) &&
-                    (!this.itemName || product.Product_name?.toLowerCase().startsWith(this.itemName.toLowerCase()))
-                ) {
-                    product.serialNumber = serialNumber;
-                    const productAmountWithGST = parseFloat(product.amount) + (parseFloat(product.amount) * this.gstrate) / 100;
-                    this.tot = productAmountWithGST;
-                    product.productAmountWithGST = productAmountWithGST;
-                    totalAmount2 += productAmountWithGST;
-                    product.gstrate = this.gstrate;
-                    this.productAmountWithGST = totalAmount2;
-    
-                    if (entry.payment_mode === 'Cash') {
-                        totalSum += productAmountWithGST;
-                    } else if (entry.payment_mode === 'Card') {
-                        totalSum1 += productAmountWithGST;
-                    } else if (entry.payment_mode === 'UPI') {
-                        totalSum2 += productAmountWithGST;
-                    } else if (entry.payment_mode === 'cash and upi' && !hasProcessedCashAndUpi) {
-                      hasProcessedCashAndUpi = true;
-                        if (!isNaN(parseFloat(entry.cash_amount))) {
-                            totalSum += parseFloat(entry.cash_amount);
-                        }
-                        if (!isNaN(parseFloat(entry.UPI_amount))) {
-                            totalSum2 += parseFloat(entry.UPI_amount);
-                        }
-                    }
-                    serialNumber++;
-                    serviceCount++;
-                }
-            }
-        }
-    
-        // Update totals after processing all details
-        this.totalsum = totalSum.toFixed(2);
-        this.totalsum1 = totalSum1.toFixed(2);
-        this.totalsum2 = totalSum2.toFixed(2);
-        this.serviceAmountWithGST = totalAmount1;
-        this.productAmountWithGST = totalAmount2;
     }
-    
-      this.count = serviceCount;
-      
 
-      this.totalAmount = totalAmount1 + totalAmount2;
-      this.totalAmount = this.totalAmount.toFixed(2);
-      this.totalamountexcel = totalAmount1 + totalAmount2;
+    // show "..." after
+    if (this.currentPage < this.totalPager - 2) {
+      pages.push(-1);
     }
+
+    // last page
+    pages.push(this.totalPager);
   }
+
+  this.visiblePager = pages;
+}
+
+
 
   updatepro(inv1: any) {
     this.route.navigate(['updateprorep']);
@@ -785,26 +486,61 @@ const empty="";
   export() {
     this.exportToExcel(this.datalist, 'Product Report');
   }
-  exportToExcel2(): void {
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(
-      document.getElementById('Record1')
-    );
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    const totalSalesRow = [null, 'Grand Total:', this.totalamountexcel];
-
-    const rowCount = ws['!ref']
-      ? XLSX.utils.decode_range(ws['!ref']).e.r + 1
-      : 0;
-    // XLSX.utils.sheet_add_json(ws, [totalSalesRow], { skipHeader: true, origin: `G${rowCount + 2}`, });
-    XLSX.utils.sheet_add_json(ws, [totalSalesRow], {
-      skipHeader: true,
-      origin: `N2`,
+  @ViewChild('Record') Record1!: ElementRef;
+    exportToExcel2() {
+    const params: any = {
+      all: true
+      // page: 1,
+      // limit: 100000 
+    };
+  
+    
+    if (this.from && this.to) {
+      params.startDate = this.from;
+      params.endDate = this.to;
+    }
+  
+    if (this.inv) params.invoice_no = this.inv;
+    if (this.customername) params.customer_name = this.customername;
+    if (this.phoneNo) params.customer_phone = this.phoneNo;
+    if (this.membership_no) params.membership_no = this.membership_no;
+    if (this.selectpaymode) params.payment_mode = this.selectpaymode;
+    if (this.selectedInvoiceType) params.invoiceType = this.selectedInvoiceType;
+   if (this.staffname) params.staffname = this.staffname;
+    this.data.getreportsPage(params).subscribe((res: any) => {
+      const fullData = res.data;
+  
+      const dataToExport = fullData.map((item:any) => ({
+        'Invoice No': item.invoice_no,
+        'Date': this.datePipe.transform(item.date,'dd-MM-yyyy'),
+        'Customer Name': item.customer_name,
+        'Phone No': item.customer_phone,
+        'Total': parseFloat(item.total),
+        'Transaction Type': item.payment_mode,
+        'Membership No': item.membership_no,
+      }));
+  
+      const totalAmount = dataToExport.reduce((t:any, i:any) => t + i.Total, 0);
+  
+      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dataToExport);
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  
+     
+      XLSX.utils.sheet_add_json(ws, [
+        {
+          'Invoice No': '',
+          'Date': '',
+          'Customer Name': '',
+          'Phone No': 'Grand Total',
+          'Total': totalAmount
+        }
+      ], { skipHeader: true, origin: -1 });
+  
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      XLSX.writeFile(wb, 'Invoice summary.xlsx');
     });
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    // Save the file
-    XLSX.writeFile(wb, 'Invoice Details.xlsx');
   }
+  
 
   isDropdownOpen1 = false;
 
