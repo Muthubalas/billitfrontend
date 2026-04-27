@@ -17,6 +17,7 @@ interface User {
   customer_phone: string;
   customer_id: string;
   membership_no: string;
+  gender:string;
   // ... other fields
 }
 
@@ -38,6 +39,7 @@ export class ServebillingComponent implements OnInit {
   roundgst:any=0;
 
   membership_no: any;
+  gender:any;
   customer_phone: any;
   customer_name: any;
   // gstamount: any;
@@ -237,7 +239,7 @@ this.datas.cusphno$.subscribe((cusphno) => {
       this.a = result;
 this.customer_name=this.a.details.customer_name;
 this.membership_no=this.a.details.membership_no;
-
+this.gender=this.a.details.gender;
 if (this.membership_no !== "") {
 
   this.updateButtonVisibility();
@@ -250,8 +252,8 @@ if (this.membership_no !== "") {
   else{
 
       this.customer_name='';
-      this.membership_no = ''
-
+      this.membership_no = '';
+this.gender= '';
   }
 })
 
@@ -267,7 +269,7 @@ this.datas.cusphno1$.subscribe((cusphno) => {
       this.a = result;
 this.customer_name=this.a.details.customer_name;
 this.membership_no=this.a.details.membership_no;
-
+this.gender=this.a.details.gender;
 if (this.membership_no !== "") {
   this.updateButtonVisibility();
 }
@@ -576,6 +578,7 @@ getdata(){
       // console.log(this.customer_name);
 
       this.membership_no = this.a.details.membership_no;
+      this.gender = this.a.details.gender;
 
       // console.log(this.a);
       if (this.membership_no === null || this.membership_no === "") {
@@ -598,7 +601,8 @@ getdata(){
   }
   else{
     this.customer_name='';
-    this.membership_no = ''
+    this.membership_no = '';
+     this.gender='';
   }
 }
 getservbillid(){
@@ -835,6 +839,7 @@ async sendServBill1() {
   }
 
   let customername = this.customer_name ? this.customer_name : '';
+   let gender = this.gender ? this.gender : '';
   customername = this.capitalizeFirstLetter(customername);
   let customerphone = this.customer_phone ? this.customer_phone : '';
   let membership = this.getservbillids ? this.getservbillids : '';
@@ -851,6 +856,7 @@ async sendServBill1() {
       data = {
         payment_mode:paymode,
         customer_name: customername,
+        gender:gender,
         customer_phone:customerphone,
         invoice_no: this.getservbillids,
         sub_total:this.subtotal,
@@ -883,6 +889,7 @@ window.location.reload()
         payment_mode:paymode,
         customer_name: customername,
         customer_phone:customerphone,
+        gender:gender,
         invoice_no: this.getservbillids,
         sub_total:this.subtotal,
         // discount:this.discountrate,
@@ -920,6 +927,7 @@ generateBillUrl1(): string {
   params.append('payment_mode', this.selectpaymode);
   params.append('customer_name', this.capitalizeFirstLetter(this.customer_name || ''));
   params.append('customer_phone', this.customer_phone || '');
+   params.append('gender', this.gender || '');
   params.append('invoice_no', this.getservbillids || '');
   params.append('sub_total', this.subtotal.toString());
   params.append('gst', this.roundgst);
@@ -1006,6 +1014,7 @@ saveAndPrintServiceInvoice() {
     payment_mode: paymentMode,
     customer_name: customerName,
     customer_phone: customerPhone,
+    gender:this.gender,
     invoice_no: membershipNo,
     sub_total: this.subtotal,
     discount: this.discountrate,
@@ -1124,7 +1133,9 @@ printservbill1(){
 
     let customername=this.customer_name?this.customer_name:"";
      customername=this.capitalizeFirstLetter(customername);
+
     let customerphone=this.customer_phone?this.customer_phone:"";
+    let gender=this.gender;
     let membership=this.getservbillids?this.getservbillids:"";
     let paymode=this.selectpaymode?this.selectpaymode:"";
     if(customername!='' && customerphone!='' && paymode!='' && arr.length > 0 && this.getservbillids!=""){
@@ -1141,6 +1152,7 @@ printservbill1(){
         payment_mode:paymode,
         customer_name: customername,
         customer_phone:customerphone,
+        gender:gender,
         invoice_no: this.getservbillids,
         sub_total:this.subtotal,
         discount:this.discountrate,
@@ -1308,6 +1320,7 @@ printBill() {
   // Prepare data for API call
   let customername = this.customer_name ? this.capitalizeFirstLetter(this.customer_name) : "";
   let customerphone = this.customer_phone ? this.customer_phone : "";
+  let gender=this.gender;
   let membership = this.getservbillids ? this.getservbillids : "";
   let paymode = this.selectpaymode ? this.selectpaymode : "";
 
@@ -1316,6 +1329,7 @@ printBill() {
       payment_mode: paymode,
       customer_name: customername,
       customer_phone: customerphone,
+      gender:gender,
       invoice_no: this.getservbillids,
       sub_total: this.subtotal,
       discount: this.discountrate,

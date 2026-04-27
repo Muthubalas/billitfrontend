@@ -25,6 +25,7 @@ export class ProbillingComponent implements OnInit {
   customer_name: any;
   membership_no: any;
   customer_phone: any;
+  gender:any;
   getpro: any[]=[];
   item:any=[];
   tableRows: string[] = [];
@@ -342,7 +343,8 @@ this.timestr=this.time.toString()
         }
         this.customer_name = this.a.details.customer_name;
 
-        this.membership_no = this.a.details.membership_no;
+        this.membership_no = this.a.details.membership_no; 
+        this.gender = this.a.details.gender;
 
         if (this.membership_no === null || this.membership_no === "") {
 
@@ -368,7 +370,8 @@ this.timestr=this.time.toString()
     }
     else{
       this.customer_name='';
-      this.membership_no = ''
+      this.membership_no = '';
+      this.gender='';
     }
   }
 
@@ -882,6 +885,7 @@ discount(){
         let customername=this.customer_name?this.customer_name:"";
          customername=this.capitalizeFirstLetter(customername);
         let customerphone=this.customer_phone?this.customer_phone:"";
+        let gender=this.gender?this.gender:"";
         let membership=this.getprobillids?this.getprobillids:"";
         let paymode=this.selectpaymode?this.selectpaymode:"";
         if(customername!='' && customerphone!='' && paymode!='' && arr.length > 0){
@@ -894,6 +898,7 @@ discount(){
             payment_mode:paymode,
             customer_name: customername,
             customer_phone:customerphone,
+            gender:gender,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             // discount:this.discountrate,
@@ -910,6 +915,7 @@ discount(){
             payment_mode:paymode,
             customer_name: customername,
             customer_phone:customerphone,
+            gender:gender,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             // discount:this.discountrate,
@@ -974,6 +980,7 @@ discount(){
         let customername=this.customer_name?this.customer_name:"";
          customername=this.capitalizeFirstLetter(customername);
         let customerphone=this.customer_phone?this.customer_phone:"";
+         let gender=this.gender?this.gender:"";
         let membership=this.getprobillids?this.getprobillids:"";
         let paymode=this.selectpaymode?this.selectpaymode:"";
         if(customername!='' && customerphone!='' && paymode!='' && arr.length > 0){
@@ -986,6 +993,7 @@ discount(){
             payment_mode:paymode,
             customer_name: customername,
             customer_phone:customerphone,
+            gender:gender,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             // discount:this.discountrate,
@@ -1002,6 +1010,7 @@ discount(){
             payment_mode:paymode,
             customer_name: customername,
             customer_phone:customerphone,
+            gender:gender,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             // discount:this.discountrate,
@@ -1086,6 +1095,7 @@ discount(){
         params.append('gst', this.roundgst);
         params.append('total', this.grandtotal);
         params.append('date', this.savedate);
+              params.append('gender', this.gender);
         this.gstpercent = this.gstrate || 0;
         params.append('gst_percent', this.gstpercent)
         params.append('membership_no', this.membership_no)
@@ -1115,6 +1125,7 @@ return this.datas.endpoint + "productpdf" + params.toString();
         params.append('payment_mode', this.selectpaymode);
         params.append('customer_name', this.capitalizeFirstLetter(this.customer_name || ''));
         params.append('customer_phone', this.customer_phone || '');
+          params.append('gender', this.gender);
         params.append('invoice_no', this.getprobillids || '');
         params.append('sub_total', this.subtotal.toString());
         params.append('gst', this.roundgst);
@@ -1184,6 +1195,7 @@ return this.datas.endpoint + "productpdf" + params.toString();
         let customername=this.customer_name?this.customer_name:"";
          customername=this.capitalizeFirstLetter(customername);
         let customerphone=this.customer_phone?this.customer_phone:"";
+          let gender=this.gender?this.gender:"";
         let membership=this.getprobillids?this.getprobillids:"";
         let paymode=this.selectpaymode?this.selectpaymode:"";
         if(customername!='' && customerphone!='' && paymode!='' && arr.length > 0 && this.getprobillids!=""){
@@ -1199,6 +1211,7 @@ return this.datas.endpoint + "productpdf" + params.toString();
           data = {
             payment_mode:paymode,
             customer_name: customername,
+            gender:gender,
             customer_phone:customerphone,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
@@ -1230,6 +1243,7 @@ return this.datas.endpoint + "productpdf" + params.toString();
           data = {
             payment_mode:paymode,
             customer_name: customername,
+            gender:gender,
             customer_phone:customerphone,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
@@ -1313,6 +1327,7 @@ return this.datas.endpoint + "productpdf" + params.toString();
         let customername=this.customer_name?this.customer_name:"";
          customername=this.capitalizeFirstLetter(customername);
         let customerphone=this.customer_phone?this.customer_phone:"";
+      let gender=this.gender?this.gender:"";
         let membership=this.getprobillids?this.getprobillids:"";
         let paymode=this.selectpaymode?this.selectpaymode:"";
         if(customername!='' && customerphone!='' && paymode!='' && arr.length > 0 && this.getprobillids!=""){
@@ -1329,6 +1344,7 @@ return this.datas.endpoint + "productpdf" + params.toString();
             payment_mode:paymode,
             customer_name: customername,
             customer_phone:customerphone,
+            gender:gender,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             date:this.savedate,
@@ -1361,6 +1377,7 @@ return this.datas.endpoint + "productpdf" + params.toString();
             payment_mode:paymode,
             customer_name: customername,
             customer_phone:customerphone,
+            gender:gender,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             date:this.savedate,
@@ -1450,6 +1467,7 @@ return this.datas.endpoint + "productpdf" + params.toString();
       }
       let customername=this.customer_name?this.customer_name:"";
       let customerphone=this.customer_phone?this.customer_phone:"";
+        let gender=this.gender?this.gender:"";
       let membership=this.getprobillids?this.getprobillids:"";
       let paymode=this.selectpaymode?this.selectpaymode:"";
       var currentdate=new Date()
@@ -1470,6 +1488,7 @@ window.location.reload()
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             discount:this.discountrate,
+            gender:gender,
             gst: this.roundgst,
             cash:  this.cash,
             upi: this.upi,
@@ -1516,6 +1535,7 @@ window.location.reload()
           data = {
             payment_mode:paymode,
             customer_name: customername,
+            gender:gender,
             customer_phone:customerphone,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
@@ -1623,6 +1643,7 @@ window.location.reload()
       let customername=this.customer_name?this.customer_name:"";
       let customerphone=this.customer_phone?this.customer_phone:"";
       let membership=this.getprobillids?this.getprobillids:"";
+        let gender=this.gender?this.gender:"";
       let paymode=this.selectpaymode?this.selectpaymode:"";
       var currentdate=new Date()
 
@@ -1639,6 +1660,7 @@ window.location.reload()
             payment_mode:paymode,
             customer_name: customername,
             customer_phone:customerphone,
+            gender:gender,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             discount:this.discountrate,
@@ -1689,6 +1711,7 @@ window.location.reload()
             payment_mode:paymode,
             customer_name: customername,
             customer_phone:customerphone,
+            gender:gender,
             invoice_no: this.getprobillids,
             sub_total:this.subtotal,
             discount:this.discountrate,
@@ -1787,12 +1810,14 @@ window.location.reload()
       }
       let customername = this.customer_name ? this.capitalizeFirstLetter(this.customer_name) : "";
       let customerphone = this.customer_phone ? this.customer_phone : "";
+       let gender = this.gender ? this.gender : "";
       let membership = this.getprobillids ? this.getprobillids : "";
       let paymode = this.selectpaymode ? this.selectpaymode : "";
       if (customername !== '' && customerphone !== '' && paymode !== '' && arr.length > 0 && this.getprobillids !== "") {
         let data = {
           payment_mode: paymode,
           customer_name: customername,
+          gender:gender,
           customer_phone: customerphone,
           invoice_no: this.getprobillids,
           sub_total: this.subtotal,
@@ -1805,6 +1830,8 @@ window.location.reload()
           date: this.savedate,
           membership_no: this.membership_no
         };
+        console.log("DATA=>",data);
+        
         if (paymode === "cash and upi" && !data.cash && !data.upi) {
           Swal.fire({
             title: 'Warning',

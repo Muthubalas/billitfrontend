@@ -476,6 +476,9 @@ addcustomer(data:any):Observable<User>{
   daywisereports():Observable<User>{
     return this.http.get(this.endpoint+"/daywise-report")
   }
+ getYears() {
+  return this.http.get<number[]>("http://localhost:3011/years");
+}
   monthwisereports(year: any): Observable<User> {
     // Append the 'year' parameter to the URL using HttpParams
     const params = new HttpParams().set('year', year);
@@ -484,6 +487,7 @@ addcustomer(data:any):Observable<User>{
     // Include the params in the get request
     return this.http.get<User>(url, { params });
   }
+  
   daywisereports1(year: any, month: any): Observable<User> {
     // Create HttpParams object with 'year' and 'month' parameters
     const params = new HttpParams()

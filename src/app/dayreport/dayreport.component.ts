@@ -104,7 +104,7 @@ export class DayreportComponent implements OnInit {
   helper=new JwtHelperService();
   profile: any;
   token: any;
-  selectedYear: number | null = null; // Default value
+  selectedYear: number = new Date().getFullYear(); // Default value
   profilerole: any;
   role: any;
   getstafflist: any;
@@ -145,7 +145,7 @@ export class DayreportComponent implements OnInit {
       this.selectedYear = currentYear;
     }
   ngOnInit(): void {
-    this.fetchYearsFromAPI();
+    this.fetchYears();
     this.selectedMonth = this.getMonthName(new Date().getMonth() + 1);
     this.daywise()
     this.token=localStorage.getItem('token')
@@ -163,29 +163,16 @@ this.role=decodetoken.role;
 
 
   }
-  fetchYearsFromAPI() {
-    this.data.getreports()
-      .subscribe((response: any) => {
-        console.log("response",response);
-        
-        const years = new Set<number>(); // To ensure unique years
-        response.sortedArray.forEach((entry: any) => {
-          // Extract year from invoice data or other date field
-          const year = new Date(entry.createdAt).getFullYear(); // Adjust field name if `created_at` is different
-          years.add(year);
-       
-          
-        });
+ fetchYears() {
+  this.data.getYears().subscribe((years: number[]) => {
+    this.yearList = years;
 
-        this.yearList = Array.from(years).sort((a, b) => a - b); // Convert to array and sort
-        this.selectedYear = this.yearList.includes(new Date().getFullYear())
-          ? new Date().getFullYear()
-          : this.yearList[0] || null;
-        this.cdr.detectChanges();
-      }, (error) => {
-        console.error('Error fetching data from API:', error);
-      });
-  }
+    // Auto select latest year
+    this.selectedYear = this.yearList[0];
+
+    
+  });
+}
   onMonthChange(): void {
     this.daywise();
 // this.updateChart(this.invoiceData);
@@ -247,8 +234,9 @@ this.role=decodetoken.role;
 daywise(){
   return this.data.daywisereports1(this.selectedYear,this.selectedMonth).subscribe((result:any)=>{
     console.log('Response from API:', result);
-  this.updateChart(result.sortedArray);
-this.getdayreport=result.sortedArray
+  this.updateChart(result.data);
+this.getdayreport=result.data;
+this.monthtotal=result.total;
 
 
   })
@@ -490,12 +478,12 @@ public updateChart(data: any[]): void {
   // Filter data by month
   this.filteredData = this.filterDataByMonth(data, this.selectedMonth);
 
-  let totalAmount = 0;
-  for (let total of this.filteredData) {
-    totalAmount += parseFloat(total.total);
-  }
+  // let totalAmount = 0;
+  // for (let total of this.filteredData) {
+  //   totalAmount += parseFloat(total.total);
+  // }
 
-  this.monthtotal = totalAmount.toFixed(2);
+  // this.monthtotal = totalAmount.toFixed(2);
 
   const ctx = (document.querySelector('.daychart') as HTMLCanvasElement).getContext('2d');
 

@@ -116,9 +116,10 @@ export class MonthreportComponent implements OnInit {
 
   model: any;
   yearList: number[] = [];
-  selectedYear: number | null = null; // Default value
+  selectedYear: number = 0; // Default value
   selectedMonth: string = 'January';
   total: any;
+  totalSaleAmnt:any;
   getmonthresult: any;
   constructor(private router:Router,private auth:AuthService,private data:DataService,
     config: NgbDatepickerConfig,private dialog:MatDialog, private cdr: ChangeDetectorRef) {
@@ -133,7 +134,7 @@ export class MonthreportComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.fetchYearsFromAPI();
+    this.fetchYears();
     this.token=localStorage.getItem('token')
     let decodetoken=this.helper.decodeToken(this.token)
 this.role=decodetoken.role;
@@ -150,29 +151,18 @@ this.role=decodetoken.role;
 
 
   }
-  fetchYearsFromAPI() {
-    this.data.getreports()
-      .subscribe((response: any) => {
-        console.log("response",response);
-        
-        const years = new Set<number>(); // To ensure unique years
-        response.sortedArray.forEach((entry: any) => {
-          // Extract year from invoice data or other date field
-          const year = new Date(entry.createdAt).getFullYear(); // Adjust field name if `created_at` is different
-          years.add(year);
-       
-          
-        });
+  fetchYears() {
+  this.data.getYears().subscribe((years: number[]) => {
+    this.yearList = years;
 
-        this.yearList = Array.from(years).sort((a, b) => a - b); // Convert to array and sort
-        this.selectedYear = this.yearList.includes(new Date().getFullYear())
-          ? new Date().getFullYear()
-          : this.yearList[0] || null;
-        this.cdr.detectChanges();
-      }, (error) => {
-        console.error('Error fetching data from API:', error);
-      });
-  }
+    // Auto select latest year
+    this.selectedYear = this.yearList[0];
+
+    // Load chart initially
+    this.loadDataForChart();
+  });
+}
+
  
   onMonthChange(): void {
 
@@ -230,40 +220,28 @@ this.role=decodetoken.role;
       this.isOpen1 = !this.isOpen1;
     }
 
-    calculateTotalSalesByMonth(data: any[]): number[] {
-      const monthlySales: number[] = Array(12).fill(0);
 
-let totalamount=0;
-for(const yeartotal of data){
-  totalamount+=parseFloat(yeartotal.total)
-
-}
-this.total=totalamount.toFixed(2)
-
-      data.forEach((item) => {
-        const createdAt = new Date(item.date);
-        const month = createdAt.getMonth();
-        const total = parseFloat(item.total); // Assuming total is a string, convert it to a number if needed
+    loadDataForChart() {
+  this.data.monthwisereports(this.selectedYear).subscribe((res: any) => {
 
 
-        monthlySales[month] += total;
-      });
+     const data = res.monthly ? res.monthly : res;
+this.totalSaleAmnt=res.grandTotal;
+    // Create 12 months array
+    const monthlySales = new Array(12).fill(0);
+ const monthlyCount = new Array(12).fill(0); 
+    data.forEach((item: any) => {
+     const index = item.month - 1;
 
-      return monthlySales;
-    }
-loadDataForChart() {
-  this.data.monthwisereports(this.selectedYear).subscribe((result: any) => {
-    // console.log(result);
-this.getmonthresult=result;
-console.log("this.getmonthresult===========]",this.getmonthresult);
+      monthlySales[index] = item.total || 0;
+      monthlyCount[index] = item.count || 0;
+    });
 
-
-
-    const monthlySales = this.calculateTotalSalesByMonth(result);
     const chartData = this.getChartData(monthlySales);
-    this.updateChart(chartData);
+    this.updateChart(chartData,monthlyCount);
   });
 }
+
 
 transformDataForExport(sortedArray: InvoiceItem[]): ModifiedDataItem[] {
   const modifiedData: ModifiedDataItem[] = [];
@@ -340,7 +318,7 @@ yearchange(year: any) {
   this.selectedYear = year.target.value;
   this.loadDataForChart();
 }
-updateChart(data: any): void {
+updateChart(data: any, monthlyCount: number[]): void {
   Chart.register(ChartDataLabels);
   const ctx = (document.getElementById('monthchart') as HTMLCanvasElement).getContext('2d');
 
@@ -362,6 +340,21 @@ updateChart(data: any): void {
         plugins: {
           legend: {
             display: false,
+          },
+           tooltip: {
+            callbacks: {
+              label: function (context: any) {
+                const value = context.raw;
+                const index = context.dataIndex;
+
+                const count = monthlyCount[index];
+
+                return [
+                  `Amount: ₹${Math.round(value)}`,
+                  `Bills: ${count}`   
+                ];
+              }
+            }
           },
           datalabels: {
             color: 'black', // Set label text color
