@@ -32,6 +32,7 @@ import { StaffrepComponent } from './staffrep/staffrep.component';
 import { DayreportComponent } from './dayreport/dayreport.component';
 import { MonthreportComponent } from './monthreport/monthreport.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { ChartreportComponent } from './chartreport/chartreport.component';
 
 // const routes: Routes = [{path:"table",component:TableComponent},
 // {path:"serve",component:ServeComponent},{path:"addservice",component:AddserviceComponent},
@@ -62,7 +63,10 @@ const routes: Routes = [{path:"product_admin",component:TableComponent,canActiva
 {path:"service",component:ServiceComponent},{path:"product",component:ProductComponent ,canActivate: [AuthGuard]},
 {path:"saloninvadmin",component:SaloninvadminComponent ,canActivate: [AuthGuard]},
 {path:"inv_details",component:InvdetailsComponent ,canActivate: [AuthGuard]},{path:"staff_report",component:StaffrepComponent ,canActivate: [AuthGuard]},
-{path:"day_report",component:DayreportComponent ,canActivate: [AuthGuard]},{path:"month_report",component:MonthreportComponent ,canActivate: [AuthGuard]}];
+{path:"day_report",component:DayreportComponent ,canActivate: [AuthGuard]},{path:"month_report",component:MonthreportComponent ,canActivate: [AuthGuard]},
+{path:"chart_report",component:ChartreportComponent ,canActivate: [AuthGuard]}
+];
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

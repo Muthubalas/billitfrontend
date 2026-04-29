@@ -222,7 +222,9 @@ this.role=decodetoken.role;
 
 
     loadDataForChart() {
-  this.data.monthwisereports(this.selectedYear).subscribe((res: any) => {
+  this.data.monthwisereports(this.
+    
+    selectedYear).subscribe((res: any) => {
 
 
      const data = res.monthly ? res.monthly : res;

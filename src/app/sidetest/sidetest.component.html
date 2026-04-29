@@ -58,13 +58,13 @@
                 </svg>
               <span class="navi"  [class.sactive]="activeRoute === 'expense'">Expense</span>
             </a></li>
-            <li (click)="opendd1()" [class.active]="activeRoute === 'inv_summary' || activeRoute === 'inv_details' || activeRoute === 'staff_report' || activeRoute === 'day_report' || activeRoute === 'month_report'">
+            <li (click)="opendd1()" [class.active]="activeRoute === 'inv_summary' || activeRoute === 'inv_details' || activeRoute === 'staff_report' || activeRoute === 'day_report' || activeRoute === 'month_report' || activeRoute === 'chart_report'">
               <div class="barlink">
                 <a>
-                  <i class="fa fa-line-chart" aria-hidden="true" [class.sactive]="activeRoute === 'inv_summary' || activeRoute === 'inv_details' || activeRoute === 'staff_report' || activeRoute === 'day_report' || activeRoute === 'month_report'"></i>
+                  <i class="fa fa-line-chart" aria-hidden="true" [class.sactive]="activeRoute === 'inv_summary' || activeRoute === 'inv_details' || activeRoute === 'staff_report' || activeRoute === 'day_report' || activeRoute === 'month_report'|| activeRoute === 'chart_report'"></i>
 
-                  <span class="navi" [class.sactive]="activeRoute === 'inv_summary' || activeRoute === 'inv_details' || activeRoute === 'staff_report' || activeRoute === 'day_report' || activeRoute === 'month_report'">Report</span>
-                  <i class="fa fa-chevron-down arr1" [class.sactive]="activeRoute === 'inv_summary' || activeRoute === 'inv_details' || activeRoute === 'staff_report' || activeRoute === 'day_report' || activeRoute === 'month_report'" id="fa2"  [@rotateIcon]="rotationState1"  style="font-size: 10px;" aria-hidden="true"></i>
+                  <span class="navi" [class.sactive]="activeRoute === 'inv_summary' || activeRoute === 'inv_details' || activeRoute === 'staff_report' || activeRoute === 'day_report' || activeRoute === 'month_report'|| activeRoute === 'chart_report'">Report</span>
+                  <i class="fa fa-chevron-down arr1" [class.sactive]="activeRoute === 'inv_summary' || activeRoute === 'inv_details' || activeRoute === 'staff_report' || activeRoute === 'day_report' || activeRoute === 'month_report'|| activeRoute === 'chart_report'" id="fa2"  [@rotateIcon]="rotationState1"  style="font-size: 10px;" aria-hidden="true"></i>
                 </a>
               </div>
               <ul class="suby1" *ngIf="subybut1">
@@ -73,6 +73,7 @@
                 <li (click)="staffrep()"><a  >Staff Report </a></li>
                 <li (click)="dayrep()"><a>Day Report </a></li>
                 <li (click)="monthrep()"><a>Month Report  </a></li>
+                 <li (click)="chartrep()"><a>Chart Report  </a></li>
               </ul>
               </li>
               <li (click)="opendd2()" [class.active]="activeRoute === 'saloninvadmin' || activeRoute === 'invent'">

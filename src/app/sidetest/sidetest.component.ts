@@ -165,6 +165,10 @@ export class SidetestComponent implements OnInit {
         this.route.navigate(['month_report'])
         this.subybut = false;
       }
+        chartrep(){
+        this.route.navigate(['chart_report'])
+        this.subybut = false;
+      }
       isOpen1:boolean = false;
 
       toggleSidebar1() {

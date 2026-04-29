@@ -476,6 +476,15 @@ addcustomer(data:any):Observable<User>{
   daywisereports():Observable<User>{
     return this.http.get(this.endpoint+"/daywise-report")
   }
+    topServices():Observable<User>{
+    return this.http.get(this.endpoint+"/top-services")
+  }
+    topProducts():Observable<User>{
+    return this.http.get(this.endpoint+"/top-products")
+  }
+    genderSale():Observable<User>{
+    return this.http.get(this.endpoint+"/gender-sale")
+  }
  getYears() {
   return this.http.get<number[]>("http://localhost:3011/years");
 }

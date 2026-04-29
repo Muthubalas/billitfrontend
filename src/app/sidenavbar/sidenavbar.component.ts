@@ -128,6 +128,10 @@ export class SidenavbarComponent implements OnInit {
       this.route.navigate(['month_report'])
       this.subybut = false;
     }
+    chartrep(){
+      this.route.navigate(['chart_report'])
+      this.subybut = false;
+    }
     staffpage(){
       this.route.navigate(['staff'])
     }

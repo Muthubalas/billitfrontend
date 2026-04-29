@@ -79,6 +79,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { AddappointmentComponent } from './addappointment/addappointment.component';
 import { UpdateappointmentComponent } from './updateappointment/updateappointment.component';
+import { ChartreportComponent } from './chartreport/chartreport.component';
 
 const routes: Routes = [
   // Define your routes here
@@ -145,7 +146,7 @@ const routes: Routes = [
        AppointmentComponent,
        AddappointmentComponent,
        UpdateappointmentComponent,
-
+ChartreportComponent,
 
 
 
